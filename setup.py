@@ -33,6 +33,6 @@ setup(name='gFunc',
     install_requires=install_requires,
     entry_points={
         'console_scripts':
-            ['gFunc=gfunc:main']
+            ['gFunc=gFunc:main']
     }
 )
