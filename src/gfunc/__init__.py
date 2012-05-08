@@ -1,4 +1,12 @@
-# Example package with a console entry point
+"""
+####################
+gfunc
+####################
+Root directory and main package namespace.
+"""
 
-def main():
-    print "Hello World"
+
+#__all__ = [fileIO,
+           #galaxy_tools,
+           #data_classes,
+           #graphTools,]
