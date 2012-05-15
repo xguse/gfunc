@@ -5,34 +5,101 @@ data_classes.py
 Code defining container classes for supported data types.
 """
 
-class GenomeFeature(object):
-    """
-    Class to store and access data for a single GenomeFeature.
-    It should be called and populated by the relevant parser objects.
-    """
-    def __init__(self, transcript_id, species_id):
-        """
-        Test comment for initiating TxObj.
-        """
-        self.transcript_id = str()
-        self.species_id = str()
-        self.abundance_data = 
+#class gFuncNodeRegistry(object):
+    #"""
+    #"""
+    #def __init__(self):
+        #"""
+        #"""
+    #def add_node(self,gFuncNode):
+        #"""
+        #"""
+    #def error_check(self):
+        #"""
+        #"""
         
-class TranscriptAbundance(object):
+#class gFuncEdgeRegistry(object):
+    #"""
+    #"""
+    #def __init__(self):
+        #"""
+        #"""
+        
+        
+class gFuncNode(object):
     """
-    Class to model a single replicate of mRNA abundance data from a single experiment set.
+    XXXXXXXXXXXX
     """
-    def __init__(self, transcript_id, species_id, experiement_id, expression_units, abundance_vector):
-        """
-        """
-        self.transcript_id     = transcript_id
-        self.species_id        = species_id        
-        self.experiement_id    = experiement_id
-        self.expression_units  = expression_units
-        self.abundance_vector  = abundance_vector # namedtuple 
-        self.condition_headers = abundance_vector._fields
+    _instance_count = 0
+    _valid_types    = () # tuple
     
-    def __repr__(self):
+    def __init__(self,type,name,species,debug=False):
         """
         """
-        return "%s;%s" % (self.transcript_id,self.experiement_id)
+        self._instance_count += 1
+        
+        self.id        = self._instance_count
+        self.type      = type
+        self.name      = name
+        self.species   = species
+        self.data      = None
+        self.votes     = None
+        
+        # --- Attribs that might be created later: ---
+        # self._neighbors = set and returned by self.get_neighbors() method
+        
+        if debug:
+            self._debug()
+            
+    def get_neighbors(self):
+        """
+        Returns a list of all gFuncNode objects that share an edge with
+        the current gFuncNode object.
+        """
+        raise NotImplementedError()
+    
+    def poll_neighbors(self):
+        """
+        Calculates and stores the...
+        """
+        raise NotImplementedError()    
+        
+    def _debug(self):
+        """
+        Runs some sanity checks in case things are not working as expected.
+        """
+        raise NotImplementedError()
+
+class gFuncEdge(object):
+    """
+    XXXXXXXXXXXX
+    """
+    _instance_count = 0
+    
+    def __init__(self):
+        """
+        XXXXXXXXXXXX
+        """
+        self._instance_count += 1
+        
+        self.nodes = None
+        self.id = None
+        self.data = None
+
+class ExpressionProfile(object):
+    """
+    XXXXXXXXXXXX
+    """
+    def __init__(self):
+        """
+        XXXXXXXXXXXX
+        """
+        
+class TFBSProfile(object):
+    """
+    XXXXXXXXXXXX
+    """
+    def __init__(self):
+        """
+        XXXXXXXXXXXX
+        """
