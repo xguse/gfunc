@@ -5,44 +5,32 @@ data_classes.py
 Code defining container classes for supported data types.
 """
 
-#class gFuncNodeRegistry(object):
-    #"""
-    #"""
-    #def __init__(self):
-        #"""
-        #"""
-    #def add_node(self,gFuncNode):
-        #"""
-        #"""
-    #def error_check(self):
-        #"""
-        #"""
+class Bunch(dict):
+    """
+    A dict like class to facilitate setting and access to tree-like data.
+    """
+    def __init__(self, *args, **kwds):
+        super(Bunch,self).__init__(*args,**kwds)
+        self.__dict__ = self
+
         
-#class gFuncEdgeRegistry(object):
-    #"""
-    #"""
-    #def __init__(self):
-        #"""
-        #"""
-        
-        
-class gFuncNode(object):
+class GFuncNode(object):
     """
     XXXXXXXXXXXX
     """
-    _instance_count = 0
+    #_instance_count = 0
     _valid_types    = () # tuple
     
-    def __init__(self,type,name,species,debug=False):
+    def __init__(self,name,species,is_target=False,debug=False):
         """
         """
-        self._instance_count += 1
+        #self._instance_count += 1
+        self._is_target = is_target
         
-        self.id        = self._instance_count
-        self.type      = type
+        #self.id        = self._instance_count
         self.name      = name
         self.species   = species
-        self.data      = None
+        self.data      = Bunch()
         self.votes     = None
         
         # --- Attribs that might be created later: ---
@@ -50,6 +38,16 @@ class gFuncNode(object):
         
         if debug:
             self._debug()
+    
+    def __repr__(self):
+        """
+        """
+        return self.name
+    
+    def set_data(self,data,data_type):
+        """
+        """
+        self.data[data_type] = data
             
     def get_neighbors(self):
         """
@@ -70,36 +68,28 @@ class gFuncNode(object):
         """
         raise NotImplementedError()
 
-class gFuncEdge(object):
+class GFuncEdge(object):
     """
     XXXXXXXXXXXX
     """
-    _instance_count = 0
+    #_instance_count = 0
     
-    def __init__(self):
+    def __init__(self,node1,node2):
         """
         XXXXXXXXXXXX
         """
-        self._instance_count += 1
+        #self._instance_count += 1
         
-        self.nodes = None
-        self.id = None
-        self.data = None
-
-class ExpressionProfile(object):
-    """
-    XXXXXXXXXXXX
-    """
-    def __init__(self):
+        #self.id = self._instance_count
+        self.nodes = (node1,node2)
+        self.data = Bunch()
+    
+    def __repr__(self):
         """
-        XXXXXXXXXXXX
         """
-        
-class TFBSProfile(object):
-    """
-    XXXXXXXXXXXX
-    """
-    def __init__(self):
+        return self.nodes    
+    
+    def set_data(self,data,data_type):
         """
-        XXXXXXXXXXXX
         """
+        self.data[data_type] = data
