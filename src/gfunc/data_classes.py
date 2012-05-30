@@ -1,10 +1,7 @@
-"""
-####################
-data_classes.py
-####################
-Code defining container classes for supported data types.
-"""
-
+from copy import deepcopy
+from collections import defaultdict
+import numpy as np
+ 
 class Bunch(dict):
     """
     A dict like class to facilitate setting and access to tree-like data.
@@ -13,55 +10,86 @@ class Bunch(dict):
         super(Bunch,self).__init__(*args,**kwds)
         self.__dict__ = self
 
+def bunchify(dict_tree):
+    """
+    TODO: doc
+    """
+    for k,v in dict_tree.iteritems():
+        if type(v) == type({}):
+            dict_tree[k] = bunchify(dict_tree[k])
+    return Bunch(dict_tree)
+
         
 class GFuncNode(object):
     """
-    XXXXXXXXXXXX
+    TODO: Doc
     """
-    #_instance_count = 0
-    _valid_types    = () # tuple
     
     def __init__(self,name,species,is_target=False,debug=False):
         """
+        TODO: Doc
         """
-        #self._instance_count += 1
         self._is_target = is_target
         
-        #self.id        = self._instance_count
-        self.name      = name
-        self.species   = species
-        self.data      = Bunch()
-        self.votes     = None
-        
-        # --- Attribs that might be created later: ---
-        # self._neighbors = set and returned by self.get_neighbors() method
+        #self.neighbors    = Bunch()
+        #self.edges        = Bunch()
+        self.name         = name
+        self.species      = species
+        self.data         = Bunch()
+        self.poll_results = Bunch()
+        self.voters_per_metric = defaultdict(list)
+        self.combo_score  = None
         
         if debug:
             self._debug()
     
     def __repr__(self):
         """
+        TODO: Doc
         """
-        return self.name
+        return "GFuncNode(%r)" % (self.name)
     
+    def get_copy(self):
+        """
+        Returns a deep copy of the node.
+        """
+        return deepcopy(self)
+        
     def set_data(self,data,data_type):
         """
+        TODO: Doc
         """
         self.data[data_type] = data
-            
-    def get_neighbors(self):
-        """
-        Returns a list of all gFuncNode objects that share an edge with
-        the current gFuncNode object.
-        """
-        raise NotImplementedError()
     
-    def poll_neighbors(self):
+    def total_votes(self):
         """
-        Calculates and stores the...
         """
-        raise NotImplementedError()    
+        total = 0
+        for voters in self.voters_per_metric.values():
+            total += len(voters)
+        return total
+    
+    def get_sub_scores(self,target_node,graph):
+        """
+        """
+        sub_scores = []
         
+        for metric in self.poll_results:
+            sub_scores.append(self.poll_results[metric])
+            sub_scores.append(graph[self][target_node]['edge'].data[metric])
+            no_nans = []
+        for s in sub_scores:
+            if not np.isnan(s):
+                no_nans.append(s)
+        return no_nans
+        
+    #def get_neighbors(self):
+        #"""
+        #"""
+    #def get_edges(self):
+        #"""
+        #"""
+                
     def _debug(self):
         """
         Runs some sanity checks in case things are not working as expected.
@@ -70,26 +98,26 @@ class GFuncNode(object):
 
 class GFuncEdge(object):
     """
-    XXXXXXXXXXXX
+    TODO: Doc
     """
-    #_instance_count = 0
     
     def __init__(self,node1,node2):
         """
-        XXXXXXXXXXXX
+        TODO: Doc
         """
-        #self._instance_count += 1
-        
-        #self.id = self._instance_count
         self.nodes = (node1,node2)
+        self.key = tuple(sorted([node1.name,node2.name]))
         self.data = Bunch()
     
     def __repr__(self):
         """
+        TODO: Doc
         """
-        return self.nodes    
+        node_tuple = self.key
+        return "GFuncEdge(%s,%s)" % (node_tuple[0],node_tuple[1])
     
     def set_data(self,data,data_type):
         """
+        TODO: Doc
         """
         self.data[data_type] = data
