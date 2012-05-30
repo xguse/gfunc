@@ -5,15 +5,17 @@ ETE.py
 Code supporting parsing phyloXML files using the ETE2 package.
 """
 import sys,os
+import cPickle
 
 import ete2
 
+from gfunc.parsers.base import GFuncParserBase
 from gfunc.xpermutations import xuniqueCombinations
 from gfunc.fileIO import walk_dirs_for_fileName
 from gfunc.data_classes import GFuncEdge
 from gfunc.data_classes import GFuncNode
 
-def load_phyloXMLs(path,species=None):
+def load_phyloXMLs(path,species=None,pickle_path=None):
     """
     Loads at least one phyloXML file and returns a Phyloxml() project containing at least one phyloXML tree.
     If path is a directory, all subdirectories are scrubed for xml files too.
@@ -24,8 +26,14 @@ def load_phyloXMLs(path,species=None):
     path = str()
     species = list()
     """
-    
+    #if pickle_path is not None:
+        #try:
+            #pickle_file = cPickle.load(open(pickle_path,'rb'))
+        #except IOError:
+            #pass
+        
     trees = []
+    
     
     if os.path.isdir(path):
         # Extract all trees from all xml in recursive subfolders
@@ -77,26 +85,30 @@ def prune_trees_by_species(ete2_tree_list,species_list):
 
 
         
-class PhyloXMLParser(object):
+class PhyloXMLParser(GFuncParserBase):
     """
     Class to accept PhyloXML files or directories and init the relevant gFuncNode/gFuncEdges Objects.
+    
+    RIGHT NOW: only used for branch_length
     """
     
-    def __init__(self, phyloXML_path='', species=[]):
+    def __init__(self, phyloXML_path='', species=[], pickle_path=None):
         """
-        Test doc for init'ing CuffDiff parser.
+        Test doc for init'ing.
         """
         # everything after rows[9] is FPKM data
         
+        self.data_type = 'branch_length'
         self.species = species
         self.trees   = load_phyloXMLs(phyloXML_path,species)
+        self.pickle_path = pickle_path
 
     def get_distance(self,leaf1,leaf2):
         """
         For two leaf objs in a common tree, returns the branch length that
         separates them.
         """
-        return leaf1.get_distance(leaf1,leaf2)
+        return float(leaf1.get_distance(leaf1,leaf2))
 
     
     def get_species(self,leaf):
@@ -110,7 +122,7 @@ class PhyloXMLParser(object):
         Iterates through every leaf in every tree in self.trees ensuring that
         a GFuncNode exists for each leaf and is registered.  GFuncNodes are
         initialized with basic info (name,species) if it doesnt already exist.
-        Then GFuncEdge objects are registered/initialized for leave combonations
+        Then GFuncEdge objects are registered/initialized for leaf combinations
         in each tree while setting 'branch_length' data for each edge.
         """
         for tree in self.trees:
@@ -125,11 +137,12 @@ class PhyloXMLParser(object):
             for leaf1,leaf2 in xuniqueCombinations(leaves,2):
                 edge_key = tuple(sorted([leaf1.name,leaf2.name]))
                 try:
-                    edge_dict[edge_key].data['branch_length'] = self.get_distance(leaf1,leaf2)
+                    edge_dict[edge_key].data[self.data_type] = self.get_distance(leaf1,leaf2)
                 except KeyError:
-                    edge_dict[edge_key] = GFuncEdge(node1=node_dict[edge_key[0]],
-                                                    node2=node_dict[edge_key[2]])
-                    edge_dict[edge_key].data['branch_length'] = self.get_distance(leaf1,leaf2)
+                    edge = GFuncEdge(node1=node_dict[edge_key[0]],
+                                     node2=node_dict[edge_key[1]])
+                    edge.data[self.data_type] = self.get_distance(leaf1,leaf2)
+                    edge_dict[edge_key] = edge
             # AM I DONE HERE?
                 
                 
