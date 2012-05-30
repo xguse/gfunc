@@ -8,7 +8,28 @@ Code supporting reading and writing from files not related to specific parsers.
 import sys
 import os
 import fnmatch
+import csv
+from collections import namedtuple
 
+
+def tableFile2namedTuple(tablePath,sep='\t',headers=None):
+    """
+    Returns namedTuple from table file using first row fields as
+    col headers or a list supplied by user.
+    """
+
+    reader  = csv.reader(open(tablePath,'rU'), delimiter=sep)
+    if not headers:
+        headers = reader.next()
+    headers = [x.replace(' ','_').replace('.','_').replace('(','_').replace(')','_').replace('-','_').replace(':','_') for x in headers]
+    Table   = namedtuple('Table', headers)
+    # wrap Table.__getattribute__() for less typing
+    def get(self,colName):
+        return self.__getattribute__(colName)
+    Table.get = get
+    
+    data    = [Table._make(x) for x in reader if x!=[]] # reader kept feeding an empty list at the end that botched everything!  wtf?!
+    return data
 
 def walk_dirs_for_fileName(dir_path,pattern="*.xml"):
     """
