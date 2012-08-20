@@ -8,6 +8,10 @@ from collections import defaultdict
 
 import numpy as np
 
+#from bulbs.model import Node as bNode
+#from bulbs.model import Relationship as bRelationship
+#from bulbs.property import String as bString
+#from bulbs.property import Integer as bInteger
 
 from gfunc.parsers.base import GFuncParserBase
 from gfunc.data_classes import GFuncNode
@@ -19,7 +23,7 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
     Class to accept CuffDiff FKPM data table and init/update the relevant gFuncNode Objects.
     """
     
-    def __init__(self, cuffdiff_path, species, name_col='nearest_ref_id',combine_transcripts=True,tx_2_gene=None):
+    def __init__(self, cuffdiff_fpkm_path, species, cuffdiff_exp_path=None, name_col='nearest_ref_id',combine_transcripts=True,tx_2_gene=None):
         """
         Test doc for init'ing CuffDiff parser.
         """
@@ -28,7 +32,8 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
         self.species = species
         self.data_type = 'expression_vector'
         self._name_col = name_col
-        self._tableFile = tableFile2namedTuple(tablePath=cuffdiff_path,sep='\t')
+        self._expDiff  = cuffdiff_exp_path
+        self._tableFile = tableFile2namedTuple(tablePath=cuffdiff_fpkm_path,sep='\t')
         self._combine_tx = combine_transcripts
         if combine_transcripts:
             if tx_2_gene is None:
@@ -36,6 +41,9 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
             else:
                 self._tx2gene_func = tx_2_gene
             self.gene_vectors = self._sum_transcripts()
+            
+        if self._expDiff is not None:
+            self._expDiff = build_expDiffTable_dict(self._expDiff)
     
     def _setup_expn_vector(self, table_row):
         """
@@ -43,12 +51,14 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
         """
         if not self._combine_tx:
             name = table_row.get(self._name_col)
+            xloc = table_row.gene_id
             vector = np.array([float(table_row[x]) for x in range(10,len(table_row),3)])
-            return name,vector
+            return name,xloc,vector
         else:
             gene_rec = table_row # for clairity that this is different process
-            name,vector = gene_rec
-            return name,vector
+            name_xloc,vector = gene_rec
+            name,xloc = name_xloc     # name_xloc = (name,xloc)
+            return name,xloc,vector
         
     def _sum_transcripts(self):
         """
@@ -62,8 +72,10 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
         
         for row in self._tableFile:
             name = self._tx2gene_func(row.get(self._name_col)) # Converts Tx symbol into Gene Symbol
+            xloc = row.gene_id
             vector = np.array([float(row[x]) for x in range(10,len(row),3)])
-            gene_vectors[name] = gene_vectors[name] + vector
+            name_xloc = (name,xloc)
+            gene_vectors[name_xloc] = gene_vectors[name_xloc] + vector
             
         return gene_vectors
              
@@ -78,13 +90,15 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
         else:
             data = self.gene_vectors.iteritems()
         for record in data: # may want to close this out
-            name,vector = self._setup_expn_vector(record)
+            name,xloc,vector = self._setup_expn_vector(record)
             try:
                 node_dict[name].set_data(data=vector,data_type=self.data_type)
             except KeyError:
                 node = GFuncNode(name=name, species=self.species, is_target=False, debug=False)
                 node.set_data(data=vector,data_type=self.data_type)
                 node_dict[name] = node
+                
+            node_dict[name]._sigDiff = am_i_sigDiff(xloc_number=xloc, expDiffTable_dict=self._expDiff, q_thresh=0.05)
 
 def transfer_nearestRefgeneSymbol_from_isoform_to_gene_tracking(isoform_fpkm_path,gene_fpkm_path):
     """
@@ -112,4 +126,68 @@ def transfer_nearestRefgeneSymbol_from_isoform_to_gene_tracking(isoform_fpkm_pat
     
     
 
-        
+# ###################
+# Complex Output Model
+# ###################
+
+##class IsoformFPKMTrackingTable(Node):
+
+    ##element_type = "isoform_fpkm"
+
+##class GeneFPKMTrackingTable(Node):
+
+    ##element_type = "gene_fpkm"
+    
+##class IsoformExpDiffTable(Node):
+
+    ##element_type = "isoform_exp_diff"
+
+##class GeneExpDiffTable(Node):
+
+    ##element_type = "gene_exp_diff"
+
+
+##class Knows(Relationship):
+    
+    ##label = "knows"
+    
+    ##created = DateTime(default=current_datetime, nullable=False)
+
+##def create_full_cufflinks_model():
+    ##"""
+    
+    ##"""
+
+def build_expDiffTable_dict(expDiffTable_path):
+    """
+    Build isoformExpDiffTable_dict:
+    
+    Keys:
+        XLOC_xxxxx
+    
+    Values:
+        namedtuple-ified rows with same XLOC_xxxxx
+    """
+    
+    rows = tableFile2namedTuple(expDiffTable_path)
+    expDiffTable_dict = defaultdict(list)
+    
+    for row in rows:
+        expDiffTable_dict[row.gene_id].append(row)
+    
+    return expDiffTable_dict
+    
+def am_i_sigDiff(xloc_number, expDiffTable_dict, q_thresh):
+    """
+    given line in cuffdiff_fpkm_table:
+        Return True if:
+            at least one of current line's XLOC_xxxx pair tests in expDiffTable_dict has q_val <= q_thresh
+        Else Return False
+    """
+    q_vals = [float(x.q_value) for x in expDiffTable_dict[xloc_number]]
+    
+    if min(q_vals) <= q_thresh:
+        return True
+    else:
+        return False
+    
