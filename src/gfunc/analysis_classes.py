@@ -13,7 +13,7 @@ from scipy import stats as sp_stats
 
 from gfunc.data_classes import Bunch
 from gfunc.maths import bayesian_score
-
+from gfunc.maths import weight_d_for_pci
 
 ######################
 # Metrics Handlers
@@ -209,6 +209,37 @@ class Metric(object):
         return np.median([x for x in self.recorded_values if x > greater_than])
     
     
+class PhyloExpnCorrelationIndex(Metric):
+    """
+    TODO: doc
+    """
+    def __init__(self,poll_me=False):
+        """
+        TODO: doc
+        """
+        self.poll_me = poll_me
+        self.relation_metric = 'PCI'
+        self.recorded_values = []
+        
+    def _calc_metric(self,gfunc_edge):
+        """
+        Does this metric's specific calculations.
+        """
+        node1,node2 = gfunc_edge.nodes
+        
+        try:
+            r_val,p_val = sp_stats.pearsonr(node1.data.expression_vector, node2.data.expression_vector)
+            d_val,d_min,d_max = gfunc_edge.data.divergence
+            
+            pci = r_val * (1-p_val) * weight_d_for_pci(d_val,d_min,d_max)
+            
+            return pci   
+        except AttributeError as err:
+            if """'Bunch' object has no attribute""" in err.message:
+                return float('nan')
+            else:
+                raise err
+
 class ExpressionSimilarity(Metric):
     """
     TODO: doc
@@ -234,7 +265,7 @@ class ExpressionSimilarity(Metric):
                 ##return float('nan')
             
             # return r_val scaled to between 0 and 1
-            scaled_rVal = (r_val+1)/2
+            #scaled_rVal = (r_val+1)/2
             return r_val     
         except AttributeError as err:
             if """'Bunch' object has no attribute""" in err.message:
