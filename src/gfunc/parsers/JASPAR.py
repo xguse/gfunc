@@ -29,7 +29,7 @@ class BasicTFBSParser(GFuncParserBase):
         
         return name,vector,species
     
-    def resgister_nodes_and_edges(self,node_dict,edge_dict):
+    def resgister_nodes_and_edges(self,node_dict,edge_dict,graph):
         """
         Parses each row from the TFBS data table and either adds the data to the relevant
         GFuncNode in node_dict or creates one and adds it to that then registers it in node_dict.
@@ -39,7 +39,7 @@ class BasicTFBSParser(GFuncParserBase):
             try:
                 node_dict[name].set_data(data=vector,data_type=self.data_type)
             except KeyError:
-                node = GFuncNode(name=name, species=species, is_target=False, debug=False)
+                node = GFuncNode(name=name, species=species, graph=graph, is_target=False, debug=False)
                 node.set_data(data=vector,data_type=self.data_type)
                 node_dict[name] = node
 
@@ -157,7 +157,7 @@ class ParseJasparMatrixOnly(object):
             return (recHead,self._recData2array(recData))   
     
     def to_dict(self):
-        """Returns a single Dict populated with the motifRecs
+        """Returns a single OrderedDict populated with the motifRecs
         contained in self._file."""
         motifDict = OrderedDict()
         while 1:
@@ -169,7 +169,7 @@ class ParseJasparMatrixOnly(object):
                 if not motifRec[0] in motifDict:
                     motifDict[motifRec[0]] = motifRec[1]
                 else:
-                    raise InvalidFileFormatError, "DuplicateFastaRec: %s occurs in your file more than once."
+                    raise ValueError, "DuplicateFastaRec: %s occurs in your file more than once."
             else:
                 break
         return motifDict
