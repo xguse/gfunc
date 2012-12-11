@@ -25,10 +25,10 @@ def bayesian_score(c,m,n,scores,scale_mod=1):
         raise ValueError
     return bs
     
-def weight_d_for_pci(d_i,d_min,d_max,w_min=1.0,w_max=1.1):
+def weight_d_for_ptci(d_i,d_min,d_max,w_min=1.0,w_max=1.1):
     """
     Scaling function to transform 'd' onto a weight-spectrum to either
-    punish or reward the final pci score based on the phylogenetic distance
+    punish or reward the final ptci score based on the phylogenetic distance
     between the two current species as it relates to the range of phylogenetic
     distances in the data set.
     
