@@ -117,7 +117,7 @@ class PhyloXMLParser(GFuncParserBase):
         """
         return leaf.phyloxml_clade.taxonomy[0].scientific_name
     
-    def resgister_nodes_and_edges(self,node_dict,edge_dict):
+    def resgister_nodes_and_edges(self,node_dict,edge_dict,graph):
         """
         Iterates through every leaf in every tree in self.trees ensuring that
         a GFuncNode exists for each leaf and is registered.  GFuncNodes are
@@ -131,7 +131,7 @@ class PhyloXMLParser(GFuncParserBase):
             # Register any unregistered nodes
             for leaf in leaves:
                 if leaf.name not in node_dict:
-                    node_dict[leaf.name] = GFuncNode(name=leaf.name,species=self.get_species(leaf))
+                    node_dict[leaf.name] = GFuncNode(name=leaf.name,species=self.get_species(leaf),graph=graph)
             
             # Get leaf pair branch lengths and register them in new or existing GFuncEdge objs
             for leaf1,leaf2 in xuniqueCombinations(leaves,2):
