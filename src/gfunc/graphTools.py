@@ -32,17 +32,19 @@ class GraphBuilder(object):
             raise ValueError('GraphBuilder object needs at least one parser in self.parsers to run self.populate_registries.')
         
         for parser in self.parsers:
-            parser.resgister_nodes_and_edges(self.node_dict,self.edge_dict)
+            parser.resgister_nodes_and_edges(self.node_dict,self.edge_dict,self.graph)
             
-    def map_registries_to_graph(self):
+    def map_registries_to_graph(self,nodes=True,edges=True):
         """
         Iterates through each registry creating graph nodes and edges.  Returns GraphHandler.
         """
-        for node in self.node_dict.itervalues():
-            self.graph.add_node(node)
-            
-        for edge in self.edge_dict.itervalues():
-            self.graph.add_edge(edge.nodes[0],edge.nodes[1], Bunch({'edge':edge}))
+        if nodes == True:
+            for node in self.node_dict.itervalues():
+                self.graph.add_node(node)
+        
+        if edges == True:
+            for edge in self.edge_dict.itervalues():
+                self.graph.add_edge(edge.nodes[0],edge.nodes[1], Bunch({'edge':edge}))
             
         return GraphHandler(self.node_dict,self.edge_dict,self.graph)
 
