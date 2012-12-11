@@ -89,8 +89,44 @@ class OneToOneOrthoListParser(GFuncParserBase):
         if self.divergence_info != None:
             self.data_type2 = 'divergence'
 
-    
-    def resgister_nodes_and_edges(self,node_dict,edge_dict):
+    def _resgister_node(self,row,node_dict,graph):
+        """
+        Register any unregistered nodes
+        """
+        
+        for species in row._fields:
+            nodeName = row.get(species)
+            if nodeName not in node_dict:
+                node_dict[nodeName] = GFuncNode(name=nodeName,species=species.replace('_',' '),graph=graph)        
+
+    def _resgister_edge(self,row,node_dict,edge_dict,graph):
+        """
+        Get leaf pair branch lengths and register them in new or existing GFuncEdge objs
+        """
+
+        for node1,node2 in xuniqueCombinations(row,2):
+            edge_key = tuple(sorted([node1,node2]))
+            try:
+                edge_dict[edge_key].data[self.data_type] = True
+                if self.divergence_info != None:
+                    
+                    div_map,div_min,div_max = self.divergence_info
+                    
+                    div = div_map[node_dict[node1].species][node_dict[node2].species]
+                    edge_dict[edge_key].data[self.data_type2] = (div,div_min,div_max)
+            except KeyError:
+                edge = GFuncEdge(node1=node_dict[edge_key[0]],
+                                 node2=node_dict[edge_key[1]])
+                edge.data[self.data_type] = True
+                edge_dict[edge_key] = edge
+                if self.divergence_info != None:
+                    
+                    div_map,div_min,div_max = self.divergence_info
+                    
+                    div = div_map[node_dict[node1].species][node_dict[node2].species]
+                    edge_dict[edge_key].data[self.data_type2] = (div,div_min,div_max)
+                    
+    def resgister_nodes_and_edges(self,node_dict,edge_dict,graph):
         """
         Iterates through every row in list_path ensuring that
         a GFuncNode exists for each nodeName and is registered.  GFuncNodes are
@@ -101,31 +137,7 @@ class OneToOneOrthoListParser(GFuncParserBase):
         for row in self.table:
             
             # Register any unregistered nodes
-            for species in row._fields:
-                nodeName = row.get(species)
-                if nodeName not in node_dict:
-                    node_dict[nodeName] = GFuncNode(name=nodeName,species=species.replace('_',' '))
+            self._resgister_node(row,node_dict,graph)
             
             # Get leaf pair branch lengths and register them in new or existing GFuncEdge objs
-            for node1,node2 in xuniqueCombinations(row,2):
-                edge_key = tuple(sorted([node1,node2]))
-                try:
-                    edge_dict[edge_key].data[self.data_type] = True
-                    if self.divergence_info != None:
-                        
-                        div_map,div_min,div_max = self.divergence_info
-                        
-                        div = div_map[node_dict[node1].species][node_dict[node2].species]
-                        edge_dict[edge_key].data[self.data_type2] = (div,div_min,div_max)
-                except KeyError:
-                    edge = GFuncEdge(node1=node_dict[edge_key[0]],
-                                     node2=node_dict[edge_key[1]])
-                    edge.data[self.data_type] = True
-                    edge_dict[edge_key] = edge
-                    if self.divergence_info != None:
-                        
-                        div_map,div_min,div_max = self.divergence_info
-                        
-                        div = div_map[node_dict[node1].species][node_dict[node2].species]
-                        edge_dict[edge_key].data[self.data_type2] = (div,div_min,div_max)            
-                
+            self._resgister_edge(row,node_dict,edge_dict,graph)
