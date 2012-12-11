@@ -13,7 +13,7 @@ from scipy import stats as sp_stats
 
 from gfunc.data_classes import Bunch
 from gfunc.maths import bayesian_score
-from gfunc.maths import weight_d_for_pci
+from gfunc.maths import weight_d_for_ptci
 
 ######################
 # Metrics Handlers
@@ -218,7 +218,7 @@ class PhyloExpnCorrelationIndex(Metric):
         TODO: doc
         """
         self.poll_me = poll_me
-        self.relation_metric = 'PCI'
+        self.relation_metric = 'PTCI'
         self.recorded_values = []
         
     def _calc_metric(self,gfunc_edge):
@@ -231,9 +231,9 @@ class PhyloExpnCorrelationIndex(Metric):
             r_val,p_val = sp_stats.pearsonr(node1.data.expression_vector, node2.data.expression_vector)
             d_val,d_min,d_max = gfunc_edge.data.divergence
             
-            pci = r_val * (1-p_val) * weight_d_for_pci(d_val,d_min,d_max)
+            ptci = r_val * (1-p_val) * weight_d_for_ptci(d_val,d_min,d_max)
             
-            return pci   
+            return ptci
         except AttributeError as err:
             if """'Bunch' object has no attribute""" in err.message:
                 return float('nan')
