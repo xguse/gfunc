@@ -25,13 +25,14 @@ class GFuncNode(object):
     TODO: Doc
     """
     
-    def __init__(self,name,species,is_target=False,debug=False):
+    def __init__(self,name,species,graph,is_target=False,debug=False):
         """
         TODO: Doc
         """
         self._is_target = is_target
+        self._graph = graph # provide reference to graph
         
-        #self.neighbors    = Bunch()
+        #self.neighbors    = self._graph[self]
         #self.edges        = Bunch()
         self.name         = name
         self.species      = species
