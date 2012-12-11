@@ -80,7 +80,7 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
         return gene_vectors
              
     
-    def resgister_nodes_and_edges(self,node_dict,edge_dict):
+    def resgister_nodes_and_edges(self,node_dict,edge_dict,graph):
         """
         Parses each row from the CuffDiff FKPM data table and either adds the data to the relevant
         GFuncNode in node_dict or creates one and adds it to that then registers it in node_dict.
@@ -94,7 +94,7 @@ class CDiffFpkmTrackerParser(GFuncParserBase):
             try:
                 node_dict[name].set_data(data=vector,data_type=self.data_type)
             except KeyError:
-                node = GFuncNode(name=name, species=self.species, is_target=False, debug=False)
+                node = GFuncNode(name=name, species=self.species, graph=graph, is_target=False, debug=False)
                 node.set_data(data=vector,data_type=self.data_type)
                 node_dict[name] = node
                 
