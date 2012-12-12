@@ -21,17 +21,17 @@ from gfunc.fileIO import tableFile2namedTuple
 
 from rSeq.utils.files import ParseFastA
 
-def dict_tree():
-    """
-    GIVEN:
-        - nothing
-    DOES:
-        - creates a lambda fuction to facilitate easy arbitrary depth dict-tree creation
-    RETURNS:
-        - lambda fuction
-    """
-    dt = lambda: defaultdict(dt)
-    return dt
+#def dict_tree():
+    #"""
+    #GIVEN:
+        #- nothing
+    #DOES:
+        #- creates a lambda fuction to facilitate easy arbitrary depth dict-tree creation
+    #RETURNS:
+        #- lambda fuction
+    #"""
+    #dt = lambda: defaultdict(dt)
+    #return dt
 
 
 
@@ -47,7 +47,7 @@ def motif_profiles_weighted_by_score(processed_moods_result_dict):
         - mps_table: pandas.DataFrame constructed as above.
     """
     # TODO: test output for correct columns/indexes
-    
+    dict_tree = lambda: defaultdict(dict_tree)
     mps_dict = dict_tree()
     
     for seqName,motifNames in processed_moods_result_dict.iteritems():
@@ -64,7 +64,7 @@ def motif_profiles_weighted_by_score(processed_moods_result_dict):
 def process_MOODS_results(moods_result_dict,motif_names):
     """
     GIVEN:
-        - moods_result_dict: orderedDict of moods_results_tuples keyed by seqName/geneName
+        - moods_result_dict: orderedDict ???is this true??? of moods_results_tuples keyed by seqName/geneName
         - motif_names: correctly ordered motif names (Motifs.motifs.keys())
     DOES:
         - converts moods_result_dict into a three key'd multi-level dict as follows:
@@ -72,7 +72,7 @@ def process_MOODS_results(moods_result_dict,motif_names):
     RETURNS:
         - processed_moods_result_dict
     """
-    
+    dict_tree = lambda: defaultdict(dict_tree)
     processed_moods_result_dict = dict_tree()
     
     for seq,motif_data in moods_result_dict.iteritems():
@@ -83,20 +83,20 @@ def process_MOODS_results(moods_result_dict,motif_names):
     return processed_moods_result_dict
     
 
-def save_MOODS_result(processed_moods_result_dict,out_path):
+def save_MOODS_result(moods_hits,out_path):
     """
     GIVEN:
-        - processed_moods_result_dict: processed result from a MOODS run.
+        - moods_hits: non-processed result from Motif.scan_seq() or Motif.scan_seqDict().
         - out_path: path to store results
     DOES:
-        - stores processed_moods_result_dict as binary pickle to out_path.
+        - stores moods_hits as binary pickle to out_path.
     RETURNS:
         - None
     """
     
     out_file = open(out_path,'wb')
     
-    cPickle.dump(moods_result,out_file,protocol=-1)
+    cPickle.dump(moods_hits,out_file,protocol=-1)
     
 def load_MOODS_result(in_path):
     """
@@ -108,6 +108,7 @@ def load_MOODS_result(in_path):
         - un-pickled MOODS result object.
     """
     
+    in_path = open(in_path,'rb')
     return cPickle.load(in_path)
 
 class Motifs(object):
