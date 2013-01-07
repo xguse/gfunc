@@ -179,10 +179,11 @@ def build_expDiffTable_dict(expDiffTable_path):
     
 def am_i_sigDiff(xloc_number, expDiffTable_dict, q_thresh):
     """
-    given line in cuffdiff_fpkm_table:
-        Return True if:
-            at least one of current line's XLOC_xxxx pair tests in expDiffTable_dict has q_val <= q_thresh
-        Else Return False
+    | for lines in cuffdiff_fpkm_table:
+    |     Return ``True`` if:
+    |         at least one of current line's XLOC_xxxx pair tests in ``expDiffTable_dict`` has *q_val* <= ``q_thresh``
+    |     Else Return ``False``
+        
     """
     q_vals = [float(x.q_value) for x in expDiffTable_dict[xloc_number]]
     
