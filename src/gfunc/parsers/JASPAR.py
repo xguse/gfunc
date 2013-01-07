@@ -107,7 +107,7 @@ class ParseJasparMatrixOnly(object):
         
     def next(self):
         """Reads in next element, parses, and does minimal verification.
-        Returns: tuple: (seqName,seqStr)"""
+        *RETURNS:* tuple: (seqName,seqStr)"""
         if not self._stop:
             pass
         else:
