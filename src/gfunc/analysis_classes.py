@@ -57,9 +57,9 @@ class RelationsHandler(MetricHandler):
     
     def measure_relations(self,edge_dict):
         """
-        For each gfunc_edge in dict:
-           iterates through metrics:
-              calculates & stores result in gfunc_edge and metric_handler
+        | For each *gfunc_edge* in ``edge_dict``:
+        |     iterates through *metrics*:
+        |        calculates & stores result in *gfunc_edge* and *metric_handler*
         """
         for gfunc_edge in edge_dict.itervalues():
             for metric in self.metrics.itervalues():
