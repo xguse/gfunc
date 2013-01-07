@@ -37,14 +37,14 @@ from rSeq.utils.files import ParseFastA
 
 def motif_profiles_weighted_by_score(processed_moods_result_dict):
     """
-    GIVEN:
-        - processed_moods_result_dict: output from (def process_MOODS_results())
-    DOES:
-        - iterates through processed_moods_result_dict and calculates a motif presence score (mps)
-          for each motifName:seqName pair by summing the all positive site_scores for motifName in seqName.
-        - mps are recorded in a pandas.DataFrame with columns = motifName and indexs = seqName.
-    RETURNS:
-        - mps_table: pandas.DataFrame constructed as above.
+    *GIVEN:*
+        * processed_moods_result_dict: output from (def ``process_MOODS_results()``)
+    *DOES:*
+        * iterates through ``processed_moods_result_dict`` and calculates a motif presence score (mps)
+          for each motifName:seqName pair by summing the all positive ``site_scores`` for motifName in seqName.
+        * mps are recorded in a ``pandas.DataFrame`` with columns = motifName and indexs = seqName.
+    *RETURNS:*
+        * mps_table: ``pandas.DataFrame`` constructed as above.
     """
     # TODO: test output for correct columns/indexes
     dict_tree = lambda: defaultdict(dict_tree)
@@ -63,14 +63,14 @@ def motif_profiles_weighted_by_score(processed_moods_result_dict):
 
 def process_MOODS_results(moods_result_dict,motif_names):
     """
-    GIVEN:
-        - moods_result_dict: orderedDict ???is this true??? of moods_results_tuples keyed by seqName/geneName
-        - motif_names: correctly ordered motif names (Motifs.motifs.keys())
-    DOES:
-        - converts moods_result_dict into a three key'd multi-level dict as follows:
-          processed_moods_result_dict[SeqName][motifName][location] = score
-    RETURNS:
-        - processed_moods_result_dict
+    *GIVEN:*
+        * ``moods_result_dict``: orderedDict ???is this true??? of moods_results_tuples keyed by seqName/geneName
+        * ``motif_names``: correctly ordered motif names (Motifs.motifs.keys())
+    *DOES:*
+        * converts ``moods_result_dict`` into a three key'd multi-level dict as follows:
+          ``processed_moods_result_dict[SeqName][motifName][location] = score``
+    *RETURNS:*
+        * ``processed_moods_result_dict``
     """
     dict_tree = lambda: defaultdict(dict_tree)
     processed_moods_result_dict = dict_tree()
@@ -85,13 +85,13 @@ def process_MOODS_results(moods_result_dict,motif_names):
 
 def save_MOODS_result(moods_hits,out_path):
     """
-    GIVEN:
-        - moods_hits: non-processed result from Motif.scan_seq() or Motif.scan_seqDict().
-        - out_path: path to store results
-    DOES:
-        - stores moods_hits as binary pickle to out_path.
-    RETURNS:
-        - None
+    *GIVEN:*
+        * ``moods_hits``: non-processed result from ``Motif.scan_seq()`` or ``Motif.scan_seqDict()``.
+        * ``out_path``: path to store results
+    *DOES:*
+        * stores ``moods_hits`` as binary pickle to ``out_path``.
+    *RETURNS:*
+        * ``None``
     """
     
     out_file = open(out_path,'wb')
@@ -100,12 +100,12 @@ def save_MOODS_result(moods_hits,out_path):
     
 def load_MOODS_result(in_path):
     """
-    GIVEN:
-        - in_path: path to store results
-    DOES:
-        - loads processed_moods_result_dict from binary pickle to in_path.
-    RETURNS:
-        - un-pickled MOODS result object.
+    *GIVEN:*
+        * ``in_path``: path to store results
+    *DOES:*
+        * loads ``processed_moods_result_dict`` from binary pickle to ``in_path``.
+    *RETURNS:*
+        * un-pickled MOODS result object.
     """
     
     in_path = open(in_path,'rb')
@@ -120,61 +120,61 @@ class Motifs(object):
     
     def __len__(self):
         """
-        RETURNS:
-            - len(self.motifs)
+        *RETURNS:*
+            * len(``self.motifs``)
         """
         return len(self.motifs)
     
     def load_JASPAR_motifs(self,pwm_file):
         """
-        GIVEN:
-            - pwm_file: path to JASPAR formated PWMs.
-        DOES:
-            - Parses PWMs and stores them in self.
-        RETURNS:
-            - None
+        *GIVEN:*
+            * ``pwm_file``: path to JASPAR formated PWMs.
+        *DOES:*
+            * Parses PWMs and stores them in ``self``.
+        *RETURNS:*
+            * ``None``
         """
         motifs = ParseJasparMatrixOnly(pwm_file)
         self.motifs = motifs.to_dict()
         
     def settings(self):
         """
-        RETURNS:
-            - dict of current settings for Motifs instance.
+        *RETURNS:*
+            * dict of current settings for ``Motifs`` instance.
         """
         return self._settings.copy()
         
     def set_threshold(self,thresh=0.001):
         """
-        GIVEN:
-            - thresh: threshold cut-off for MOODS to report a 'hit' location.
-        DOES:
-            - Sets and stores the current scanning sensitivity.
-        RETURNS:
-            - None
+        *GIVEN:*
+            * ``thresh``: threshold cut-off for MOODS to report a 'hit' location.
+        *DOES:*
+            * Sets and stores the current scanning sensitivity.
+        *RETURNS:*
+            * ``None``
         """
         self._settings['thresh'] = thresh
         
     def set_both_strands(self,both=False):
         """
-        GIVEN:
-            - both: True or False.
-        DOES:
-            - Sets and stores whether to search both strands of each sequence.
-        RETURNS:
-            - None
+        *GIVEN:*
+            * ``both``: True or False.
+        *DOES:*
+            * Sets and stores whether to search both strands of each sequence.
+        *RETURNS:*
+            * ``None``
         """
         self._settings['both_strands'] = both    
 
     def scan_seq(self,sequence):
         """
-        GIVEN:
-            - sequence: a single sequence to be scanned.
-        DOES:
-            - Scans seq for each motif in self.
-            - Reports the location AND score for each 'hit' in the sequence.
-        RETURNS:
-            - moods_hits_for_seq: nested tuples
+        *GIVEN:*
+            * ``sequence``: a single sequence to be scanned.
+        *DOES:*
+            * Scans seq for each motif in ``self``.
+            * Reports the location AND score for each 'hit' in the sequence.
+        *RETURNS:*
+            * ``moods_hits_for_seq``: nested tuples
         """
         # set up recorded options
         motifs = self.motifs.values()
@@ -193,13 +193,13 @@ class Motifs(object):
         
     def scan_seqDict(self,seq_dict):
         """
-        GIVEN:
-            - seq_dict: dict of sequences (key=rec_name,value=rec_sequence).
-        DOES:
-            - Scans each seq in seq_dict for each motif in self.
-            - Reports the location AND score for each 'hit' in each sequence.
-        RETURNS:
-            - moods_hits_for_seqDict: dict of nested tuples
+        *GIVEN:*
+            * ``seq_dict``: dict of sequences (key=rec_name,value=rec_sequence).
+        *DOES:*
+            * Scans each seq in ``seq_dict`` for each motif in ``self``.
+            * Reports the location AND score for each 'hit' in each sequence.
+        *RETURNS:*
+            * ``moods_hits_for_seqDic``t: dict of nested tuples
         """       
 
         moods_hits_for_seqDict = defaultdict(tuple)
