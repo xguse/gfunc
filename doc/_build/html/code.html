@@ -56,38 +56,981 @@
 <h2>gfunc<a class="headerlink" href="#gfunc" title="Permalink to this headline">¶</a></h2>
 <p>Root directory and main package namespace.</p>
 </div>
-<span class="target" id="module-gfunc.fileIO"></span><div class="section" id="fileio-py">
-<h2>fileIO.py<a class="headerlink" href="#fileio-py" title="Permalink to this headline">¶</a></h2>
-<p>Code supporting reading/writing data from/to files.</p>
-</div>
-<span class="target" id="module-gfunc.fileIO.parsers"></span><div class="section" id="parsers-py">
-<h2>parsers.py<a class="headerlink" href="#parsers-py" title="Permalink to this headline">¶</a></h2>
-<p>Code supporting specific data parsing.</p>
+<span class="target" id="module-gfunc.parsers.__init__"></span><div class="section" id="parsers">
+<h2>parsers<a class="headerlink" href="#parsers" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting parsing of supported raw data files.</p>
+<span class="target" id="module-gfunc.parsers.base"></span><div class="section" id="base-py">
+<h3>base.py<a class="headerlink" href="#base-py" title="Permalink to this headline">¶</a></h3>
+<p>Code defining base parser class: TODO.</p>
 <dl class="class">
-<dt id="gfunc.fileIO.parsers.CuffDiffParser">
-<em class="property">class </em><tt class="descclassname">gfunc.fileIO.parsers.</tt><tt class="descname">CuffDiffParser</tt><big>(</big><em>cuffdiff_path</em>, <em>options=None</em><big>)</big><a class="headerlink" href="#gfunc.fileIO.parsers.CuffDiffParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to accept CuffDiff isoform FKPM data table and init the relevant TranscriptAbundance Objects.</p>
+<dt id="gfunc.parsers.base.GFuncParserBase">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.base.</tt><tt class="descname">GFuncParserBase</tt><a class="headerlink" href="#gfunc.parsers.base.GFuncParserBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: define once I have settled on common needs.</p>
 </dd></dl>
 
 </div>
-<span class="target" id="module-gfunc.galaxy_tools"></span><div class="section" id="galaxy-tools">
-<h2>galaxy_tools<a class="headerlink" href="#galaxy-tools" title="Permalink to this headline">¶</a></h2>
-<p>Code supporting the integration of gFunc with the Galaxy paradigm.</p>
-</div>
-<span class="target" id="module-gfunc.data_classes"></span><div class="section" id="data-classes-py">
-<h2>data_classes.py<a class="headerlink" href="#data-classes-py" title="Permalink to this headline">¶</a></h2>
-<p>Code defining container classes for supported data types.</p>
+<span class="target" id="module-gfunc.parsers.Cufflinks"></span><div class="section" id="cufflinks-py">
+<h3>Cufflinks.py<a class="headerlink" href="#cufflinks-py" title="Permalink to this headline">¶</a></h3>
+<p>Code supporting parsing of Cufflinks type raw data files.</p>
 <dl class="class">
-<dt id="gfunc.data_classes.TranscriptAbundance">
-<em class="property">class </em><tt class="descclassname">gfunc.data_classes.</tt><tt class="descname">TranscriptAbundance</tt><big>(</big><em>parser_output</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.TranscriptAbundance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to store and access expression data for a single transcript.
-It should be called and populated by the relevant parser object.</p>
+<dt id="gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.Cufflinks.</tt><tt class="descname">CDiffFpkmTrackerParser</tt><big>(</big><em>cuffdiff_fpkm_path</em>, <em>species</em>, <em>cuffdiff_exp_path=None</em>, <em>name_col='nearest_ref_id'</em>, <em>combine_transcripts=True</em>, <em>tx_2_gene=None</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to accept CuffDiff FKPM data table and init/update the relevant gFuncNode Objects.</p>
+<dl class="method">
+<dt id="gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>cuffdiff_fpkm_path</em>, <em>species</em>, <em>cuffdiff_exp_path=None</em>, <em>name_col='nearest_ref_id'</em>, <em>combine_transcripts=True</em>, <em>tx_2_gene=None</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test doc for init&#8217;ing CuffDiff parser.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser.resgister_nodes_and_edges">
+<tt class="descname">resgister_nodes_and_edges</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser.resgister_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses each row from the CuffDiff FKPM data table and either adds the data to the relevant
+GFuncNode in node_dict or creates one and adds it to that then registers it in node_dict.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.Cufflinks.am_i_sigDiff">
+<tt class="descclassname">gfunc.parsers.Cufflinks.</tt><tt class="descname">am_i_sigDiff</tt><big>(</big><em>xloc_number</em>, <em>expDiffTable_dict</em>, <em>q_thresh</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.am_i_sigDiff" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">for lines in cuffdiff_fpkm_table:</div>
+<div class="line-block">
+<div class="line">Return <tt class="docutils literal"><span class="pre">True</span></tt> if:</div>
+<div class="line-block">
+<div class="line">at least one of current line&#8217;s XLOC_xxxx pair tests in <tt class="docutils literal"><span class="pre">expDiffTable_dict</span></tt> has <em>q_val</em> &lt;= <tt class="docutils literal"><span class="pre">q_thresh</span></tt></div>
+</div>
+<div class="line">Else Return <tt class="docutils literal"><span class="pre">False</span></tt></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.Cufflinks.build_expDiffTable_dict">
+<tt class="descclassname">gfunc.parsers.Cufflinks.</tt><tt class="descname">build_expDiffTable_dict</tt><big>(</big><em>expDiffTable_path</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.build_expDiffTable_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build isoformExpDiffTable_dict:</p>
+<dl class="docutils">
+<dt>Keys:</dt>
+<dd>XLOC_xxxxx</dd>
+<dt>Values:</dt>
+<dd>namedtuple-ified rows with same XLOC_xxxxx</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.Cufflinks.transfer_nearestRefgeneSymbol_from_isoform_to_gene_tracking">
+<tt class="descclassname">gfunc.parsers.Cufflinks.</tt><tt class="descname">transfer_nearestRefgeneSymbol_from_isoform_to_gene_tracking</tt><big>(</big><em>isoform_fpkm_path</em>, <em>gene_fpkm_path</em><big>)</big><a class="headerlink" href="#gfunc.parsers.Cufflinks.transfer_nearestRefgeneSymbol_from_isoform_to_gene_tracking" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.parsers.edge_lists"></span><div class="section" id="edge-lists-py">
+<h3>edge_lists.py<a class="headerlink" href="#edge-lists-py" title="Permalink to this headline">¶</a></h3>
+<p>Code supporting parsing of lists into edge connections.</p>
+<dl class="class">
+<dt id="gfunc.parsers.edge_lists.OneToOneOrthoListParser">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.edge_lists.</tt><tt class="descname">OneToOneOrthoListParser</tt><big>(</big><em>list_path=''</em>, <em>divergence_info=None</em>, <em>relation_type='one_to_one_ortholog'</em><big>)</big><a class="headerlink" href="#gfunc.parsers.edge_lists.OneToOneOrthoListParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to accept list of rows when each item/node_name in the row should have edges to all other items in the row
+and init the relevant gFuncNode/gFuncEdges Objects.  Each Column should have a header that is supported
+by gfunc.fileIO.tableFile2namedTuple representing the species of the nodeName in that column (Anopheles_gambiae).</p>
+<dl class="method">
+<dt id="gfunc.parsers.edge_lists.OneToOneOrthoListParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>list_path=''</em>, <em>divergence_info=None</em>, <em>relation_type='one_to_one_ortholog'</em><big>)</big><a class="headerlink" href="#gfunc.parsers.edge_lists.OneToOneOrthoListParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc for init&#8217;ing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.edge_lists.OneToOneOrthoListParser.resgister_nodes_and_edges">
+<tt class="descname">resgister_nodes_and_edges</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.parsers.edge_lists.OneToOneOrthoListParser.resgister_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates through every row in list_path ensuring that
+a GFuncNode exists for each nodeName and is registered.  GFuncNodes are
+initialized with basic info (name,species) if it doesnt already exist.
+Then GFuncEdge objects are registered/initialized for nodeName combinations
+in each row while setting &lt;relation_type&gt; data_type to &#8216;True&#8217; for each edge.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.edge_lists.combine_multiple_one2one_tables">
+<tt class="descclassname">gfunc.parsers.edge_lists.</tt><tt class="descname">combine_multiple_one2one_tables</tt><big>(</big><em>path_list, species_prefixes=['AGAP', 'AAEL', 'CPIJ']</em><big>)</big><a class="headerlink" href="#gfunc.parsers.edge_lists.combine_multiple_one2one_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a set of linked dicts with:</p>
+<dl class="docutils">
+<dt>Keys:</dt>
+<dd>GeneName</dd>
+<dt>Values:</dt>
+<dd>Link to other GeneName keys that are supossed one2one orthologs</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.edge_lists.follow_all_links">
+<tt class="descclassname">gfunc.parsers.edge_lists.</tt><tt class="descname">follow_all_links</tt><big>(</big><em>graph</em>, <em>node</em><big>)</big><a class="headerlink" href="#gfunc.parsers.edge_lists.follow_all_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all nodes in connected subgraph wrt node.</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.parsers.ETE"></span><div class="section" id="ete-py">
+<h3>ETE.py<a class="headerlink" href="#ete-py" title="Permalink to this headline">¶</a></h3>
+<p>Code supporting parsing phyloXML files using the ETE2 package.</p>
+<dl class="class">
+<dt id="gfunc.parsers.ETE.PhyloXMLParser">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.ETE.</tt><tt class="descname">PhyloXMLParser</tt><big>(</big><em>phyloXML_path=''</em>, <em>species=</em><span class="optional">[</span><span class="optional">]</span>, <em>pickle_path=None</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.PhyloXMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to accept PhyloXML files or directories and init the relevant gFuncNode/gFuncEdges Objects.</p>
+<p>RIGHT NOW: only used for branch_length</p>
+<dl class="method">
+<dt id="gfunc.parsers.ETE.PhyloXMLParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>phyloXML_path=''</em>, <em>species=</em><span class="optional">[</span><span class="optional">]</span>, <em>pickle_path=None</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.PhyloXMLParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test doc for init&#8217;ing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.ETE.PhyloXMLParser.get_distance">
+<tt class="descname">get_distance</tt><big>(</big><em>leaf1</em>, <em>leaf2</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.PhyloXMLParser.get_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>For two leaf objs in a common tree, returns the branch length that
+separates them.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.ETE.PhyloXMLParser.get_species">
+<tt class="descname">get_species</tt><big>(</big><em>leaf</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.PhyloXMLParser.get_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the species scientific name of a leaf obj.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.ETE.PhyloXMLParser.resgister_nodes_and_edges">
+<tt class="descname">resgister_nodes_and_edges</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.PhyloXMLParser.resgister_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates through every leaf in every tree in self.trees ensuring that
+a GFuncNode exists for each leaf and is registered.  GFuncNodes are
+initialized with basic info (name,species) if it doesnt already exist.
+Then GFuncEdge objects are registered/initialized for leaf combinations
+in each tree while setting &#8216;branch_length&#8217; data for each edge.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.ETE.load_phyloXMLs">
+<tt class="descclassname">gfunc.parsers.ETE.</tt><tt class="descname">load_phyloXMLs</tt><big>(</big><em>path</em>, <em>species=None</em>, <em>pickle_path=None</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.load_phyloXMLs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads at least one phyloXML file and returns a Phyloxml() project containing at least one phyloXML tree.
+If path is a directory, all subdirectories are scrubed for xml files too.</p>
+<p>If species!=None, prunes trees to leaves that are of the supplied scientific species names (can save a LOT
+of memory if the number of trees is large).</p>
+<p>path = str()
+species = list()</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.parsers.ETE.prune_trees_by_species">
+<tt class="descclassname">gfunc.parsers.ETE.</tt><tt class="descname">prune_trees_by_species</tt><big>(</big><em>ete2_tree_list</em>, <em>species_list</em><big>)</big><a class="headerlink" href="#gfunc.parsers.ETE.prune_trees_by_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>XXXX</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.parsers.GTF"></span><div class="section" id="gtf-py">
+<h3>GTF.py<a class="headerlink" href="#gtf-py" title="Permalink to this headline">¶</a></h3>
+<p>Code supporting parsing/indexing of GTF/GFF data files.</p>
+<p>NOTE: The &#8220;business&#8221; end of this code uses (read: depends on) the gtf_to_genes module:</p>
+<blockquote>
+<div>Metadata-Version: 1.0
+Name: gtf-to-genes
+Version: 1.07
+Summary: Fast GTF parser
+Home-page: <a class="reference external" href="http://code.google.com/p/gtf-to-genes/">http://code.google.com/p/gtf-to-genes/</a>
+Author: Leo Goodstadt
+Author-email: <a class="reference external" href="mailto:gtf_to_genes&#37;&#52;&#48;llew&#46;org&#46;uk">gtf_to_genes<span>&#64;</span>llew<span>&#46;</span>org<span>&#46;</span>uk</a>
+License: MIT</div></blockquote>
+</div>
+<span class="target" id="module-gfunc.parsers.JASPAR"></span><dl class="class">
+<dt id="gfunc.parsers.JASPAR.BasicTFBSParser">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.JASPAR.</tt><tt class="descname">BasicTFBSParser</tt><big>(</big><em>tfbs_path</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.BasicTFBSParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to accept TFBS profile data table from &#8216;find_motifs.py&#8217; and init/update the relevant gFuncNode Objects.</p>
+<dl class="method">
+<dt id="gfunc.parsers.JASPAR.BasicTFBSParser.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>tfbs_path</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.BasicTFBSParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test doc for init&#8217;ing TFBS parser.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.JASPAR.BasicTFBSParser.resgister_nodes_and_edges">
+<tt class="descname">resgister_nodes_and_edges</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.BasicTFBSParser.resgister_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses each row from the TFBS data table and either adds the data to the relevant
+GFuncNode in node_dict or creates one and adds it to that then registers it in node_dict.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly">
+<em class="property">class </em><tt class="descclassname">gfunc.parsers.JASPAR.</tt><tt class="descname">ParseJasparMatrixOnly</tt><big>(</big><em>filePath</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a record-by-record motif parser for JASPAR matric_only.txt files analogous to file.readline().
+example:
+&gt;MA0001.1 AGL3
+A  [ 0  3 79 40 66 48 65 11 65  0 ]
+C  [94 75  4  3  1  2  5  2  3  3 ]
+G  [ 1  0  3  4  1  0  5  3 28 88 ]
+T  [ 2 19 11 50 29 47 22 81  1  6 ]
+&gt;MA0002.1 RUNX1
+A  [10 12  4  1  2  2  0  0  0  8 13 ]
+C  [ 2  2  7  1  0  8  0  0  1  2  2 ]
+G  [ 3  1  1  0 23  0 26 26  0  0  4 ]
+T  [11 11 14 24  1 16  0  0 25 16  7 ]</p>
+<dl class="method">
+<dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>filePath</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a record-by-record motif parser analogous to file.readline().
+Exmpl: parser.next()
+Its ALSO an iterator so &#8220;for rec in parser&#8221; works too!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly.next">
+<tt class="descname">next</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in next element, parses, and does minimal verification.
+<em>RETURNS:</em> tuple: (seqName,seqStr)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a single OrderedDict populated with the motifRecs
+contained in self._file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-gfunc.parsers.MAST"></span><div class="section" id="mast-py">
+<h3>MAST.py<a class="headerlink" href="#mast-py" title="Permalink to this headline">¶</a></h3>
+<p>Code supporting parsing of MAST type raw data files.</p>
+</div>
+</div>
+<span class="target" id="module-gfunc.analysis_classes"></span><div class="section" id="analysis-classes-py">
+<h2>analysis_classes.py<a class="headerlink" href="#analysis-classes-py" title="Permalink to this headline">¶</a></h2>
+<p>Code defining controller classes for supported analysis types.</p>
+<dl class="class">
+<dt id="gfunc.analysis_classes.BranchLength">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">BranchLength</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.BranchLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.BranchLength.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.BranchLength.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.BranchLength.measure_relation">
+<tt class="descname">measure_relation</tt><big>(</big><em>gfunc_edge</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.BranchLength.measure_relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.ExpressionSimilarity">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">ExpressionSimilarity</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.ExpressionSimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.ExpressionSimilarity.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.ExpressionSimilarity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.Metric">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">Metric</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.Metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.Metric.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.Metric.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.Metric.mean">
+<tt class="descname">mean</tt><big>(</big><em>greater_than=0</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.Metric.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean of the encountered values greater than the value provided.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.Metric.measure_relation">
+<tt class="descname">measure_relation</tt><big>(</big><em>gfunc_edge</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.Metric.measure_relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.Metric.median">
+<tt class="descname">median</tt><big>(</big><em>greater_than=0</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.Metric.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the median of the encountered values greater than the value provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.PhyloExpnCorrelationIndex">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">PhyloExpnCorrelationIndex</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.PhyloExpnCorrelationIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.PhyloExpnCorrelationIndex.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.PhyloExpnCorrelationIndex.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.RelationsHandler">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">RelationsHandler</tt><big>(</big><em>list_of_metrics</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.RelationsHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relations are metrics that characterize how an
+edge&#8217;s 2 connected nodes relate given some type
+of relationship (branch length, expression profile
+similarity, etc).</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.RelationsHandler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>list_of_metrics</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.RelationsHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.RelationsHandler.get_vote_types">
+<tt class="descname">get_vote_types</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.RelationsHandler.get_vote_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.RelationsHandler.measure_relations">
+<tt class="descname">measure_relations</tt><big>(</big><em>edge_dict</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.RelationsHandler.measure_relations" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">For each <em>gfunc_edge</em> in <tt class="docutils literal"><span class="pre">edge_dict</span></tt>:</div>
+<div class="line-block">
+<div class="line">iterates through <em>metrics</em>:</div>
+<div class="line-block">
+<div class="line">calculates &amp; stores result in <em>gfunc_edge</em> and <em>metric_handler</em></div>
+</div>
+</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.TFBSSimilarity">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">TFBSSimilarity</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.TFBSSimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.TFBSSimilarity.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>poll_me=False</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.TFBSSimilarity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.analysis_classes.VoteHandler">
+<em class="property">class </em><tt class="descclassname">gfunc.analysis_classes.</tt><tt class="descname">VoteHandler</tt><big>(</big><em>graph</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.VoteHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>VoteHandlers determine how well the current GFuncNode&#8217;s
+neighborhood agrees with it regarding each type of relation
+being used.  The result is a weighted mean, weighted by
+a strength (or trustability metric) between each neighbor
+and the current node (exp: branch length, p-value, etc).
+If no weight relationship is specified, the result is a
+standard mean (weights are equal).</p>
+<dl class="method">
+<dt id="gfunc.analysis_classes.VoteHandler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>graph</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.VoteHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.VoteHandler.set_vote_types">
+<tt class="descname">set_vote_types</tt><big>(</big><em>vote_types</em>, <em>weight_by=None</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.VoteHandler.set_vote_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recieves and stores as LIST &#8216;Metric.relation_metric&#8217; string for
+each Metric class that needs a vote taken.</p>
+<p>weight_by: one or none of the gfunc_edge.data key strings to use to weight
+the votes of each node&#8217;s neighbor edge metrics.
+(weight_by=None results in equal weights)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.analysis_classes.VoteHandler.take_votes">
+<tt class="descname">take_votes</tt><big>(</big><em>node_list</em>, <em>poll_func=None</em><big>)</big><a class="headerlink" href="#gfunc.analysis_classes.VoteHandler.take_votes" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.clustering"></span><div class="section" id="clustering-py">
+<h2>clustering.py<a class="headerlink" href="#clustering-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting efforts to optimize and automate external clustering libraries for gFunc purposes.</p>
+<dl class="function">
+<dt id="gfunc.clustering.plot_centers_and_points">
+<tt class="descclassname">gfunc.clustering.</tt><tt class="descname">plot_centers_and_points</tt><big>(</big><em>data</em>, <em>clusters</em>, <em>means</em>, <em>truth=None</em><big>)</big><a class="headerlink" href="#gfunc.clustering.plot_centers_and_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.data_classes"></span><dl class="class">
+<dt id="gfunc.data_classes.Bunch">
+<em class="property">class </em><tt class="descclassname">gfunc.data_classes.</tt><tt class="descname">Bunch</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.Bunch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict like class to facilitate setting and access to tree-like data.</p>
+<dl class="method">
+<dt id="gfunc.data_classes.Bunch.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.Bunch.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.data_classes.GFuncEdge">
+<em class="property">class </em><tt class="descclassname">gfunc.data_classes.</tt><tt class="descname">GFuncEdge</tt><big>(</big><em>node1</em>, <em>node2</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncEdge.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>node1</em>, <em>node2</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncEdge.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncEdge.set_data">
+<tt class="descname">set_data</tt><big>(</big><em>data</em>, <em>data_type</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncEdge.set_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.data_classes.GFuncNode">
+<em class="property">class </em><tt class="descclassname">gfunc.data_classes.</tt><tt class="descname">GFuncNode</tt><big>(</big><em>name</em>, <em>species</em>, <em>graph</em>, <em>is_target=False</em>, <em>debug=False</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncNode.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>name</em>, <em>species</em>, <em>graph</em>, <em>is_target=False</em>, <em>debug=False</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncNode.get_copy">
+<tt class="descname">get_copy</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode.get_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a deep copy of the node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncNode.get_sub_scores">
+<tt class="descname">get_sub_scores</tt><big>(</big><em>target_node</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode.get_sub_scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncNode.set_data">
+<tt class="descname">set_data</tt><big>(</big><em>data</em>, <em>data_type</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode.set_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.data_classes.GFuncNode.total_votes">
+<tt class="descname">total_votes</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.data_classes.GFuncNode.total_votes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.data_classes.bunchify">
+<tt class="descclassname">gfunc.data_classes.</tt><tt class="descname">bunchify</tt><big>(</big><em>dict_tree</em><big>)</big><a class="headerlink" href="#gfunc.data_classes.bunchify" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: doc</p>
+</dd></dl>
+
+<span class="target" id="module-gfunc.ensembl_data"></span><div class="section" id="ensembl-data-py">
+<h2>ensembl_data.py<a class="headerlink" href="#ensembl-data-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting automated retrieval/mirroring/processing of ensembl data files and directories.</p>
+<dl class="docutils">
+<dt>WARNING:</dt>
+<dd>To some extent the functionality of this code is dependant on the
+current formating of Ensembl&#8217;s internal directory structure.</dd>
+</dl>
+<dl class="class">
+<dt id="gfunc.ensembl_data.DataGrabber">
+<em class="property">class </em><tt class="descclassname">gfunc.ensembl_data.</tt><tt class="descname">DataGrabber</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to manage conecting to ensembl-based ftp data dumps and retrieving them.</p>
+<dl class="method">
+<dt id="gfunc.ensembl_data.DataGrabber.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to manage conecting to ensembl-based ftp data dumps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.ensembl_data.DataGrabber.settings">
+<tt class="descname">settings</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber.settings" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>dict of current settings for ensembl access.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.ensembl_data.DataGrabber.transfer_data">
+<tt class="descname">transfer_data</tt><big>(</big><em>unzip=False</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber.transfer_data" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li>sufficently initiated self instance</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>[x] decides which method to use to get the data</li>
+<li>[x] creates local directory if needed based on base_local_path</li>
+<li>[x] initiates data transfer</li>
+<li>[] complains if it detects incomplete transfer</li>
+<li>[] if unzip evaluates to True, recursively unzip any files
+with extentions suggesting they are compressed.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>None</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.errors"></span><div class="section" id="errors-py">
+<h2>errors.py<a class="headerlink" href="#errors-py" title="Permalink to this headline">¶</a></h2>
+<p>Code defining custom base error classes to provide a foundation for graceful error handling.</p>
+<dl class="exception">
+<dt id="gfunc.errors.GFuncError">
+<em class="property">exception </em><tt class="descclassname">gfunc.errors.</tt><tt class="descname">GFuncError</tt><a class="headerlink" href="#gfunc.errors.GFuncError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for exceptions in the gFunc package.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="gfunc.errors.SystemCallError">
+<em class="property">exception </em><tt class="descclassname">gfunc.errors.</tt><tt class="descname">SystemCallError</tt><a class="headerlink" href="#gfunc.errors.SystemCallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception raised when a problem occurs while attempting to run an external system call.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>expr &#8211; input expression in which the error occurred
+msg  &#8211; explanation of the error</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="gfunc.errors.UnsatisfiedDependencyError">
+<em class="property">exception </em><tt class="descclassname">gfunc.errors.</tt><tt class="descname">UnsatisfiedDependencyError</tt><a class="headerlink" href="#gfunc.errors.UnsatisfiedDependencyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception raised when gFunc can not find a suitable option to satisfy an external dependency.</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.externals"></span><div class="section" id="externals-py">
+<h2>externals.py<a class="headerlink" href="#externals-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting running external system processes.</p>
+<dl class="function">
+<dt id="gfunc.externals.mkdirp">
+<tt class="descclassname">gfunc.externals.</tt><tt class="descname">mkdirp</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#gfunc.externals.mkdirp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new dir while creating any parent dirs in the path as needed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.externals.runExternalApp">
+<tt class="descclassname">gfunc.externals.</tt><tt class="descname">runExternalApp</tt><big>(</big><em>progName</em>, <em>argStr</em><big>)</big><a class="headerlink" href="#gfunc.externals.runExternalApp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience func to handle calling and monitoring output of external programs.</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.fdr"></span><div class="section" id="fdr-py">
+<h2>fdr.py<a class="headerlink" href="#fdr-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting easy generation of emprical FDR for results.</p>
+<dl class="function">
+<dt id="gfunc.fdr.shuffle_dict">
+<tt class="descclassname">gfunc.fdr.</tt><tt class="descname">shuffle_dict</tt><big>(</big><em>original_dict</em>, <em>shuffle_count</em><big>)</big><a class="headerlink" href="#gfunc.fdr.shuffle_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">original_dict</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">shuffle_count</span></tt></li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>generator that yields randomly shuffled key/value pairs as a new dict <tt class="docutils literal"><span class="pre">shuffle_count</span></tt> times.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.fileIO"></span><div class="section" id="fileio-py">
+<h2>fileIO.py<a class="headerlink" href="#fileio-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting reading and writing from files not related to specific parsers.</p>
+<dl class="function">
+<dt id="gfunc.fileIO.tableFile2namedTuple">
+<tt class="descclassname">gfunc.fileIO.</tt><tt class="descname">tableFile2namedTuple</tt><big>(</big><em>tablePath</em>, <em>sep='\t'</em>, <em>headers=None</em><big>)</big><a class="headerlink" href="#gfunc.fileIO.tableFile2namedTuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns namedTuple from table file using first row fields as
+col headers or a list supplied by user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.fileIO.walk_dirs_for_fileName">
+<tt class="descclassname">gfunc.fileIO.</tt><tt class="descname">walk_dirs_for_fileName</tt><big>(</big><em>dir_path</em>, <em>pattern='*.xml'</em><big>)</big><a class="headerlink" href="#gfunc.fileIO.walk_dirs_for_fileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively collects file paths in a dir and subdirs.</p>
 </dd></dl>
 
 </div>
 <span class="target" id="module-gfunc.graphTools"></span><div class="section" id="graphtools-py">
 <h2>graphTools.py<a class="headerlink" href="#graphtools-py" title="Permalink to this headline">¶</a></h2>
 <p>Code supporting building and querying the graphs.</p>
+<dl class="class">
+<dt id="gfunc.graphTools.GraphBuilder">
+<em class="property">class </em><tt class="descclassname">gfunc.graphTools.</tt><tt class="descname">GraphBuilder</tt><big>(</big><em>parsers</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="gfunc.graphTools.GraphBuilder.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>parsers</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphBuilder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphBuilder.map_registries_to_graph">
+<tt class="descname">map_registries_to_graph</tt><big>(</big><em>nodes=True</em>, <em>edges=True</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphBuilder.map_registries_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates through each registry creating graph nodes and edges.  Returns GraphHandler.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphBuilder.populate_registries">
+<tt class="descname">populate_registries</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphBuilder.populate_registries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates through provided parsers and calls the parsers &#8216;resgister_nodes_and_edges&#8217;
+method to populate/update the relevant registries (node/edge_dict).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gfunc.graphTools.GraphHandler">
+<em class="property">class </em><tt class="descclassname">gfunc.graphTools.</tt><tt class="descname">GraphHandler</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>node_dict</em>, <em>edge_dict</em>, <em>graph</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.clone_node_as_target">
+<tt class="descname">clone_node_as_target</tt><big>(</big><em>node_name</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.clone_node_as_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.install_metric_handlers">
+<tt class="descname">install_metric_handlers</tt><big>(</big><em>rel_hndler</em>, <em>vote_hndlr</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.install_metric_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.install_target">
+<tt class="descname">install_target</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.install_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.measure_relations">
+<tt class="descname">measure_relations</tt><big>(</big><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.measure_relations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cues RelationsHandler to do its thing after pasing it self.edge_dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gfunc.graphTools.GraphHandler.take_votes">
+<tt class="descname">take_votes</tt><big>(</big><em>node_list</em>, <em>poll_func=None</em><big>)</big><a class="headerlink" href="#gfunc.graphTools.GraphHandler.take_votes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cues VoteHandler to do its thing after pasing it a list of specific
+GFuncNode objects.</p>
+<p>Example:
+&gt;&gt;&gt; node_list = [node for node in node_dict.itervalues() if node.species == &#8216;Anopheles gambie&#8217;].</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.maths"></span><div class="section" id="maths-py">
+<h2>maths.py<a class="headerlink" href="#maths-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting specialized calculations for gfunc.</p>
+<dl class="function">
+<dt id="gfunc.maths.bayesian_score">
+<tt class="descclassname">gfunc.maths.</tt><tt class="descname">bayesian_score</tt><big>(</big><em>c</em>, <em>m</em>, <em>n</em>, <em>scores</em>, <em>scale_mod=1</em><big>)</big><a class="headerlink" href="#gfunc.maths.bayesian_score" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">BS = ((c * m) + sum([x for x in scores])) / (n + c)</div>
+<div class="line"><br /></div>
+<div class="line">Where:</div>
+<div class="line"><br /></div>
+<div class="line"><tt class="docutils literal"><span class="pre">n</span></tt>: number of votes for THIS item</div>
+<div class="line"><tt class="docutils literal"><span class="pre">C</span></tt>: median number of votes for all items that got at least 1 vote (weighting or dampening factor)</div>
+<div class="line"><tt class="docutils literal"><span class="pre">m</span></tt>: median UNweighted score for all items that got at least 1 vote  </div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.maths.weight_d_for_ptci">
+<tt class="descclassname">gfunc.maths.</tt><tt class="descname">weight_d_for_ptci</tt><big>(</big><em>d_i</em>, <em>d_min</em>, <em>d_max</em>, <em>w_min=1.0</em>, <em>w_max=1.1</em><big>)</big><a class="headerlink" href="#gfunc.maths.weight_d_for_ptci" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scaling function to transform &#8216;d&#8217; onto a weight-spectrum to either
+punish or reward the final ptci score based on the phylogenetic distance
+between the two current species as it relates to the range of phylogenetic
+distances in the data set.</p>
+<p>Default weight scale is no change for the shortest distance (return 1.0) to
+a 10% reward for the longest distance (return 1.1).</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.motifs"></span><div class="section" id="motifs-py">
+<h2>motifs.py<a class="headerlink" href="#motifs-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting the searching, recording, and analysis of sequence motifs for gFunc.</p>
+<dl class="function">
+<dt id="gfunc.motifs.load_MOODS_result">
+<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">load_MOODS_result</tt><big>(</big><em>in_path</em><big>)</big><a class="headerlink" href="#gfunc.motifs.load_MOODS_result" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">in_path</span></tt>: path to store results</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>loads <tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt> from binary pickle to <tt class="docutils literal"><span class="pre">in_path</span></tt>.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>un-pickled MOODS result object.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.motifs.motif_profiles_weighted_by_score">
+<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">motif_profiles_weighted_by_score</tt><big>(</big><em>processed_moods_result_dict</em><big>)</big><a class="headerlink" href="#gfunc.motifs.motif_profiles_weighted_by_score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li>processed_moods_result_dict: output from (def <tt class="docutils literal"><span class="pre">process_MOODS_results()</span></tt>)</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>iterates through <tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt> and calculates a motif presence score (mps)
+for each motifName:seqName pair by summing the all positive <tt class="docutils literal"><span class="pre">site_scores</span></tt> for motifName in seqName.</li>
+<li>mps are recorded in a <tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt> with columns = motifName and indexs = seqName.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>mps_table: <tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt> constructed as above.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.motifs.process_MOODS_results">
+<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">process_MOODS_results</tt><big>(</big><em>moods_result_dict</em>, <em>motif_names</em><big>)</big><a class="headerlink" href="#gfunc.motifs.process_MOODS_results" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">moods_result_dict</span></tt>: orderedDict ???is this true??? of moods_results_tuples keyed by seqName/geneName</li>
+<li><tt class="docutils literal"><span class="pre">motif_names</span></tt>: correctly ordered motif names (Motifs.motifs.keys())</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>converts <tt class="docutils literal"><span class="pre">moods_result_dict</span></tt> into a three key&#8217;d multi-level dict as follows:
+<tt class="docutils literal"><span class="pre">processed_moods_result_dict[SeqName][motifName][location]</span> <span class="pre">=</span> <span class="pre">score</span></tt></li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.motifs.save_MOODS_result">
+<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">save_MOODS_result</tt><big>(</big><em>moods_hits</em>, <em>out_path</em><big>)</big><a class="headerlink" href="#gfunc.motifs.save_MOODS_result" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">moods_hits</span></tt>: non-processed result from <tt class="docutils literal"><span class="pre">Motif.scan_seq()</span></tt> or <tt class="docutils literal"><span class="pre">Motif.scan_seqDict()</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">out_path</span></tt>: path to store results</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>stores <tt class="docutils literal"><span class="pre">moods_hits</span></tt> as binary pickle to <tt class="docutils literal"><span class="pre">out_path</span></tt>.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">None</span></tt></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.stats"></span><div class="section" id="stats-py">
+<h2>stats.py<a class="headerlink" href="#stats-py" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting calculations of statistical probabilities for gfunc.</p>
+<dl class="function">
+<dt id="gfunc.stats.basic_bootstrap_est">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">basic_bootstrap_est</tt><big>(</big><em>vec</em>, <em>reps=1000</em><big>)</big><a class="headerlink" href="#gfunc.stats.basic_bootstrap_est" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">vec</span></tt> = vector of sample values</li>
+<li><tt class="docutils literal"><span class="pre">reps</span></tt> = number of resampling reps</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>Resample w/ replacement <tt class="docutils literal"><span class="pre">reps</span></tt> times and record the medians</li>
+<li>Calculate stdv of resampled medians which should approach
+the actual SE as <tt class="docutils literal"><span class="pre">reps</span></tt> approaches <tt class="docutils literal"><span class="pre">inf</span></tt>.</li>
+<li>Calculate the 95% CI bounds.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>tuple([<em>median of resampled medians</em>, <em>SE est</em>, <em>loBound</em>, <em>hiBound</em>])</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.benjHochFDR">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">benjHochFDR</tt><big>(</big><em>table</em>, <em>pValColumn=-1</em><big>)</big><a class="headerlink" href="#gfunc.stats.benjHochFDR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">table</span></tt>: 2D list(<em>hypothesis</em>,*p-value*) hypothesis could = <em>geneName</em> tested for enrichment</li>
+<li><tt class="docutils literal"><span class="pre">pValColumn</span></tt>: integer of column index containing the <em>p-value</em>.</li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>Calculates the Benjamini-Hochberg adjusted <em>p-values</em></li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>a new version of <tt class="docutils literal"><span class="pre">table</span></tt> with an extra column added to the end representing the BH corrected <em>p-values</em></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.binComb">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">binComb</tt><big>(</big><em>n</em>, <em>k</em><big>)</big><a class="headerlink" href="#gfunc.stats.binComb" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>GIVEN:</em></dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">n</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">k</span></tt></li>
+</ul>
+</dd>
+<dt><em>DOES:</em></dt>
+<dd><ul class="first last simple">
+<li>Computes <tt class="docutils literal"><span class="pre">n</span></tt> <em>choose</em> <tt class="docutils literal"><span class="pre">k</span></tt>.</li>
+</ul>
+</dd>
+<dt><em>RETURNS:</em></dt>
+<dd><ul class="first last simple">
+<li>The number of ways <tt class="docutils literal"><span class="pre">k</span></tt> objects can be sampled from a population of size <tt class="docutils literal"><span class="pre">n</span></tt>.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.binomialPval">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">binomialPval</tt><big>(</big><em>n</em>, <em>k</em>, <em>p</em><big>)</big><a class="headerlink" href="#gfunc.stats.binomialPval" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>RETURNS:</em> </dt>
+<dd><ul class="first last simple">
+<li>exact binomial P-value.</li>
+</ul>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">n</span></tt> = number of trials</div>
+<div class="line"><tt class="docutils literal"><span class="pre">k</span></tt> = number of successes</div>
+<div class="line"><tt class="docutils literal"><span class="pre">p</span></tt> = probability of a success</div>
+<div class="line"><br /></div>
+<div class="line"><em>P(k succeses in n trials) = choose(n,k) (p^k) ((1-p)^(n-k))</em></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.binomialPval_gte">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">binomialPval_gte</tt><big>(</big><em>n</em>, <em>k</em>, <em>p</em><big>)</big><a class="headerlink" href="#gfunc.stats.binomialPval_gte" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>RETURNS:</em> </dt>
+<dd><ul class="first last simple">
+<li>binomial <em>p-value</em> of <tt class="docutils literal"><span class="pre">k</span></tt> or greater successes in <tt class="docutils literal"><span class="pre">n</span></tt> trials with probability of success for each trial <tt class="docutils literal"><span class="pre">p</span></tt>.</li>
+</ul>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">n</span></tt> = number of trials</div>
+<div class="line"><tt class="docutils literal"><span class="pre">k</span></tt> = number of successes</div>
+<div class="line"><tt class="docutils literal"><span class="pre">p</span></tt> = probability of a success</div>
+<div class="line"><br /></div>
+<div class="line"><em>sum( choose(n,k) (p^k) ( (1-p)^(n-k) ) )</em> as <tt class="docutils literal"><span class="pre">k</span></tt> goes from <tt class="docutils literal"><span class="pre">k</span></tt> to <tt class="docutils literal"><span class="pre">n</span></tt></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.cumHypergeoP">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">cumHypergeoP</tt><big>(</big><em>n</em>, <em>i</em>, <em>m</em>, <em>N</em><big>)</big><a class="headerlink" href="#gfunc.stats.cumHypergeoP" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Calculates the cumulative hypergeometric <em>p-value</em> for variables:</div>
+<div class="line"><br /></div>
+<div class="line"><tt class="docutils literal"><span class="pre">n</span></tt> = number of positives in population</div>
+<div class="line"><tt class="docutils literal"><span class="pre">i</span></tt> = number of positives in sample</div>
+<div class="line"><tt class="docutils literal"><span class="pre">m</span></tt> = number of negatives in population</div>
+<div class="line"><tt class="docutils literal"><span class="pre">N</span></tt> = sample size</div>
+<div class="line"><br /></div>
+<div class="line"><em>P(i) = sum([as i-&gt;N] (choose(n,i)choose(m,N-i))/choose(n+m,N))</em></div>
+<div class="line"><br /></div>
+<div class="line">For more details -&gt; <a class="reference external" href="http://mathworld.wolfram.com/HypergeometricDistribution.html">http://mathworld.wolfram.com/HypergeometricDistribution.html</a></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gfunc.stats.hypergeoP">
+<tt class="descclassname">gfunc.stats.</tt><tt class="descname">hypergeoP</tt><big>(</big><em>n</em>, <em>i</em>, <em>m</em>, <em>N</em><big>)</big><a class="headerlink" href="#gfunc.stats.hypergeoP" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Calculates the non-cumulative hypergeometric <em>p-value</em> for variables:</div>
+<div class="line"><br /></div>
+<div class="line"><tt class="docutils literal"><span class="pre">n</span></tt> = number of positives in population</div>
+<div class="line"><tt class="docutils literal"><span class="pre">i</span></tt> = number of positives in sample</div>
+<div class="line"><tt class="docutils literal"><span class="pre">m</span></tt> = number of negatives in population</div>
+<div class="line"><tt class="docutils literal"><span class="pre">N</span></tt> = sample size</div>
+<div class="line"><br /></div>
+<div class="line"><em>P(x=i) = (choose(n,i)choose(m,N-i))/choose(n+m,N)</em></div>
+<div class="line"><br /></div>
+<div class="line">For more details -&gt; <a class="reference external" href="http://mathworld.wolfram.com/HypergeometricDistribution.html">http://mathworld.wolfram.com/HypergeometricDistribution.html</a></div>
+</div>
+</dd></dl>
+
+</div>
+<span class="target" id="module-gfunc.xpermutations"></span><span class="target" id="module-gfunc.galaxy_tools"></span><div class="section" id="galaxy-tools">
+<h2>galaxy_tools<a class="headerlink" href="#galaxy-tools" title="Permalink to this headline">¶</a></h2>
+<p>Code supporting the integration of gFunc with the Galaxy paradigm.</p>
+<p>So far this is empty!</p>
 </div>
 </div>
 
@@ -101,11 +1044,27 @@ It should be called and populated by the relevant parser object.</p>
   <ul>
 <li><a class="reference internal" href="#">gFunc Auto-Generated Code Documentation</a><ul>
 <li><a class="reference internal" href="#gfunc">gfunc</a></li>
+<li><a class="reference internal" href="#parsers">parsers</a><ul>
+<li><a class="reference internal" href="#base-py">base.py</a></li>
+<li><a class="reference internal" href="#cufflinks-py">Cufflinks.py</a></li>
+<li><a class="reference internal" href="#edge-lists-py">edge_lists.py</a></li>
+<li><a class="reference internal" href="#ete-py">ETE.py</a></li>
+<li><a class="reference internal" href="#gtf-py">GTF.py</a></li>
+<li><a class="reference internal" href="#mast-py">MAST.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis-classes-py">analysis_classes.py</a></li>
+<li><a class="reference internal" href="#clustering-py">clustering.py</a></li>
+<li><a class="reference internal" href="#ensembl-data-py">ensembl_data.py</a></li>
+<li><a class="reference internal" href="#errors-py">errors.py</a></li>
+<li><a class="reference internal" href="#externals-py">externals.py</a></li>
+<li><a class="reference internal" href="#fdr-py">fdr.py</a></li>
 <li><a class="reference internal" href="#fileio-py">fileIO.py</a></li>
-<li><a class="reference internal" href="#parsers-py">parsers.py</a></li>
-<li><a class="reference internal" href="#galaxy-tools">galaxy_tools</a></li>
-<li><a class="reference internal" href="#data-classes-py">data_classes.py</a></li>
 <li><a class="reference internal" href="#graphtools-py">graphTools.py</a></li>
+<li><a class="reference internal" href="#maths-py">maths.py</a></li>
+<li><a class="reference internal" href="#motifs-py">motifs.py</a></li>
+<li><a class="reference internal" href="#stats-py">stats.py</a></li>
+<li><a class="reference internal" href="#galaxy-tools">galaxy_tools</a></li>
 </ul>
 </li>
 </ul>
