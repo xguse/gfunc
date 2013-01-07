@@ -14,20 +14,20 @@ import operator as o
 
 def basic_bootstrap_est(vec,reps=1000):
     """
-    GIVEN:
-    1) vec = vector of sample values
-    2) reps = number of resampling reps
+    *GIVEN:*
+        * ``vec`` = vector of sample values
+        * ``reps`` = number of resampling reps
     
-    DO:
-    1) Resample w/ replacement *reps* times and record the medians
-    2) Calculate stdv of resampled medians which should approach
-       the actual SE as *reps* approaches *inf*.
-    3) Calculate the 95% CI bounds.
+    *DOES:*
+        * Resample w/ replacement ``reps`` times and record the medians
+        * Calculate stdv of resampled medians which should approach
+          the actual SE as ``reps`` approaches ``inf``.
+        * Calculate the 95% CI bounds.
        
        
     
-    RETURN:
-    1) tuple([*median of resampled medians*, *SE est*, *loBound*, *hiBound*])
+    *RETURNS:*
+        * tuple([*median of resampled medians*, *SE est*, *loBound*, *hiBound*])
     """
     
     reSampledMeds = []
@@ -50,8 +50,14 @@ def basic_bootstrap_est(vec,reps=1000):
 
 def benjHochFDR(table,pValColumn=-1):
     """
-    table      = 2D list(hypothesis,p-value) hypothesis could = geneName tested for enrichment
-    pValColumn = integer of column index containing the p-value.
+    *GIVEN:*
+        * ``table``: 2D list(*hypothesis*,*p-value*) hypothesis could = *geneName* tested for enrichment
+        * ``pValColumn``: integer of column index containing the *p-value*.
+    *DOES:*
+        * Calculates the Benjamini-Hochberg adjusted *p-values*
+    *RETURNS:*
+        * a new version of ``table`` with an extra column added to the end representing the BH corrected *p-values*
+    
     """
     assert type(pValColumn) == type(1),\
            "ERROR: pValColumn must be int type!"
@@ -80,8 +86,14 @@ def benjHochFDR(table,pValColumn=-1):
 
 def binComb(n, k):
     """
-    binComb(n, k): Computes n choose k. Defines the number of k objects that can be chosen from 
-    n objects.
+    *GIVEN:*
+        * ``n``
+        * ``k``
+    *DOES:*
+        * Computes ``n`` *choose* ``k``. 
+    *RETURNS:*
+        * The number of ways ``k`` objects can be sampled from a population of size ``n``.
+    
     """
     if (k > n): return 0
     if (k < 0): return 0
@@ -114,15 +126,17 @@ except ImportError:
 
 def hypergeoP(n,i,m,N):
     """
-    Calculates the non-cumulative hypergeometric p-value for variables:
-    n = # of positives in population
-    i = # of positives in sample
-    m = # of negatives in population
-    N = sample size
-
-    P(x=i) = (choose(n,i)choose(m,N-i))/choose(n+m,N)
-
-    For more details -> http://mathworld.wolfram.com/HypergeometricDistribution.html
+    | Calculates the non-cumulative hypergeometric *p-value* for variables:
+    | 
+    | ``n`` = number of positives in population
+    | ``i`` = number of positives in sample
+    | ``m`` = number of negatives in population
+    | ``N`` = sample size
+    | 
+    | *P(x=i) = (choose(n,i)choose(m,N-i))/choose(n+m,N)*
+    | 
+    | For more details -> http://mathworld.wolfram.com/HypergeometricDistribution.html
+    
     """
     return (bestChoose(n,i)*bestChoose(m,N-i))/float(bestChoose(n+m,N))
 
@@ -131,15 +145,17 @@ def hypergeoP(n,i,m,N):
 
 def cumHypergeoP(n,i,m,N):
     """
-    Calculates the cumulative hypergeometric p-value for variables:
-    n = # of positives in population
-    i = # of positives in sample
-    m = # of negatives in population
-    N = sample size
-
-    P(i) = sum([as i->N] (choose(n,i)choose(m,N-i))/choose(n+m,N))
-
-    For more details -> http://mathworld.wolfram.com/HypergeometricDistribution.html
+    | Calculates the cumulative hypergeometric *p-value* for variables:
+    | 
+    | ``n`` = number of positives in population
+    | ``i`` = number of positives in sample
+    | ``m`` = number of negatives in population
+    | ``N`` = sample size
+    | 
+    | *P(i) = sum([as i->N] (choose(n,i)choose(m,N-i))/choose(n+m,N))*
+    | 
+    | For more details -> http://mathworld.wolfram.com/HypergeometricDistribution.html
+    
     """
 
     cumPVal = 0
@@ -151,18 +167,33 @@ def cumHypergeoP(n,i,m,N):
 
 
 def binomialPval(n,k,p):
-    """Returns exact binomial P-value.
-    n = number of trials
-    k = number of successes
-    p = probability of a success
+    """
+    *RETURNS:* 
+        * exact binomial P-value.
     
-    P(k succeses in n trials) = choose(n,k) * p^k * (1-p)^(n-k)
+    | ``n`` = number of trials
+    | ``k`` = number of successes
+    | ``p`` = probability of a success
+    | 
+    | *P(k succeses in n trials) = choose(n,k) (p^k) ((1-p)^(n-k))*
+    
     """
     
     return bestChoose(n,k) * p**k * (1-p)**(n-k)
 
 def binomialPval_gte(n,k,p):
-    """Returns binomial P-value of k or greater successes in n trials."""
+    """
+    *RETURNS:* 
+        * binomial *p-value* of ``k`` or greater successes in ``n`` trials with probability of success for each trial ``p``.
+    
+    | ``n`` = number of trials
+    | ``k`` = number of successes
+    | ``p`` = probability of a success
+    | 
+    | *sum( choose(n,k) (p^k) ( (1-p)^(n-k) ) )* as ``k`` goes from ``k`` to ``n``
+    
+    """    
+
     cumPVal = 0
     for k in range(k,n+1):
         cumPVal = cumPVal + binomialPval(n,k,p)
