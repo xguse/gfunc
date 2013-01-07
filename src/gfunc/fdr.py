@@ -9,9 +9,11 @@ import random
 
 def shuffle_dict(original_dict,shuffle_count):
     """
-    RETURNS:
-        - generator that yields randomly shuffled key/value pairs as new dict
-          <shuffle_count> times.
+    *GIVEN:*
+        * ``original_dict``
+        * ``shuffle_count``
+    *RETURNS:*
+        * generator that yields randomly shuffled key/value pairs as a new dict ``shuffle_count`` times.
     """
     original_keys = tuple(original_dict.keys())
     random_keys = original_dict.keys()
