@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 
 def __generate_random_data_centers(size1=200,size2=300,size3=200):
     """
-    DOES:
-        - generates 3 sets of data containing randomized members centered around known coords (x1,x2,x3)
-    RETURNS:
-        - tuple(data,x1,x2,x3)
+    *DOES:*
+        * generates 3 sets of data containing randomized members centered around known coords (x1,x2,x3)
+    *RETURNS:*
+        * tuple(data,x1,x2,x3)
     """
     
     mean1, cov1, n1 = [1, 5], [[1,1],[1,2]], size1 # 200 points, mean=(1,5)
