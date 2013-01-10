@@ -6,7 +6,10 @@ Code supporting a VERY simple motif analysis of multiple promoters.  This script
 library.
 """
 import argparse
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 import numpy as np
 from scipy import stats
