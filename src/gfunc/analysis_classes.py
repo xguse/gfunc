@@ -231,7 +231,11 @@ class PhyloExpnCorrelationIndex(Metric):
             r_val,p_val = sp_stats.pearsonr(node1.data.expression_vector, node2.data.expression_vector)
             d_val,d_min,d_max = gfunc_edge.data.divergence
             
-            ptci = r_val * (1-p_val) * weight_d_for_ptci(d_val,d_min,d_max)
+            # I am trying out different ways to include the p_val into this index
+            # Xiaohui thinks 1-p is introducing biases in the Null Distribution
+            
+            ptci = r_val * (1-p_val) * weight_d_for_ptci(d_val,d_min,d_max) # original
+            #ptci = r_val * (1-p_val) * weight_d_for_ptci(d_val,d_min,d_max) # log
             
             return ptci
         except AttributeError as err:

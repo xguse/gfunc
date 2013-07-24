@@ -1,0 +1,30 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}gFunc Tutorial}{3}{chapter.1}
+\contentsline {chapter}{\numberline {2}Project Summary}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Goals}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Lessons Learned}{5}{section.2.2}
+\contentsline {chapter}{\numberline {3}gFunc Auto-Generated Code Documentation}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}gfunc}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}parsers}{7}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}base.py}{7}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Cufflinks.py}{7}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}edge\_lists.py}{8}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}ETE.py}{8}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}GTF.py}{9}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}JASPAR.py}{9}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}MAST.py}{10}{subsection.3.2.7}
+\contentsline {section}{\numberline {3.3}analysis\_classes.py}{10}{section.3.3}
+\contentsline {section}{\numberline {3.4}clustering.py}{11}{section.3.4}
+\contentsline {section}{\numberline {3.5}ensembl\_data.py}{12}{section.3.5}
+\contentsline {section}{\numberline {3.6}errors.py}{14}{section.3.6}
+\contentsline {section}{\numberline {3.7}externals.py}{14}{section.3.7}
+\contentsline {section}{\numberline {3.8}fdr.py}{14}{section.3.8}
+\contentsline {section}{\numberline {3.9}fileIO.py}{15}{section.3.9}
+\contentsline {section}{\numberline {3.10}graphTools.py}{15}{section.3.10}
+\contentsline {section}{\numberline {3.11}maths.py}{15}{section.3.11}
+\contentsline {section}{\numberline {3.12}motifs.py}{16}{section.3.12}
+\contentsline {section}{\numberline {3.13}stats.py}{17}{section.3.13}
+\contentsline {section}{\numberline {3.14}galaxy\_tools}{19}{section.3.14}
+\contentsline {chapter}{\numberline {4}Indices and tables}{21}{chapter.4}
+\contentsline {chapter}{Python Module Index}{23}{section*.127}
+\contentsline {chapter}{Index}{25}{section*.128}

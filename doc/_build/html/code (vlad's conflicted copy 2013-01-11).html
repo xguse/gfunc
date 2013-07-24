@@ -3,16 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>gFunc Auto-Generated Code Documentation &mdash; gFunc 0.1 documentation</title>
-    
+    <title>gFunc Auto-Generated Code Documentation &mdash; gFunc v0.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -25,7 +22,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="gFunc 0.1 documentation" href="index.html" />
+    <link rel="top" title="gFunc v0.1 documentation" href="index.html" />
     <link rel="prev" title="Project Summary" href="project.html" /> 
   </head>
   <body>
@@ -41,7 +38,7 @@
         <li class="right" >
           <a href="project.html" title="Project Summary"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">gFunc 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">gFunc v0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -97,11 +94,11 @@ GFuncNode in node_dict or creates one and adds it to that then registers it in n
 <dd><div class="line-block">
 <div class="line">for lines in cuffdiff_fpkm_table:</div>
 <div class="line-block">
-<div class="line">Return <tt class="docutils literal"><span class="pre">True</span></tt> if:</div>
+<div class="line">Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if:</div>
 <div class="line-block">
 <div class="line">at least one of current line&#8217;s XLOC_xxxx pair tests in <tt class="docutils literal"><span class="pre">expDiffTable_dict</span></tt> has <em>q_val</em> &lt;= <tt class="docutils literal"><span class="pre">q_thresh</span></tt></div>
 </div>
-<div class="line">Else Return <tt class="docutils literal"><span class="pre">False</span></tt></div>
+<div class="line">Else Return <tt class="xref docutils literal"><span class="pre">False</span></tt></div>
 </div>
 </div>
 </dd></dl>
@@ -242,10 +239,7 @@ Author: Leo Goodstadt
 Author-email: <a class="reference external" href="mailto:gtf_to_genes&#37;&#52;&#48;llew&#46;org&#46;uk">gtf_to_genes<span>&#64;</span>llew<span>&#46;</span>org<span>&#46;</span>uk</a>
 License: MIT</div></blockquote>
 </div>
-<span class="target" id="module-gfunc.parsers.JASPAR"></span><div class="section" id="jaspar-py">
-<h3>JASPAR.py<a class="headerlink" href="#jaspar-py" title="Permalink to this headline">¶</a></h3>
-<p>Code supporting reading and writing of basic PSSMs representing TFBS profiles; especially in JASPAR format.</p>
-<dl class="class">
+<span class="target" id="module-gfunc.parsers.JASPAR"></span><dl class="class">
 <dt id="gfunc.parsers.JASPAR.BasicTFBSParser">
 <em class="property">class </em><tt class="descclassname">gfunc.parsers.JASPAR.</tt><tt class="descname">BasicTFBSParser</tt><big>(</big><em>tfbs_path</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.BasicTFBSParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to accept TFBS profile data table from &#8216;find_motifs.py&#8217; and init/update the relevant gFuncNode Objects.</p>
@@ -267,9 +261,9 @@ GFuncNode in node_dict or creates one and adds it to that then registers it in n
 <dl class="class">
 <dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly">
 <em class="property">class </em><tt class="descclassname">gfunc.parsers.JASPAR.</tt><tt class="descname">ParseJasparMatrixOnly</tt><big>(</big><em>filePath</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a record-by-record motif parser for JASPAR matric_only.txt files analogous to file.readline().</p>
-<p>Example:</p>
-<div class="highlight-python"><pre>&gt;MA0001.1 AGL3
+<dd><p>Returns a record-by-record motif parser for JASPAR matric_only.txt files analogous to file.readline().
+example:
+&gt;MA0001.1 AGL3
 A  [ 0  3 79 40 66 48 65 11 65  0 ]
 C  [94 75  4  3  1  2  5  2  3  3 ]
 G  [ 1  0  3  4  1  0  5  3 28 88 ]
@@ -278,8 +272,7 @@ T  [ 2 19 11 50 29 47 22 81  1  6 ]
 A  [10 12  4  1  2  2  0  0  0  8 13 ]
 C  [ 2  2  7  1  0  8  0  0  1  2  2 ]
 G  [ 3  1  1  0 23  0 26 26  0  0  4 ]
-T  [11 11 14 24  1 16  0  0 25 16  7 ]</pre>
-</div>
+T  [11 11 14 24  1 16  0  0 25 16  7 ]</p>
 <dl class="method">
 <dt id="gfunc.parsers.JASPAR.ParseJasparMatrixOnly.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>filePath</em><big>)</big><a class="headerlink" href="#gfunc.parsers.JASPAR.ParseJasparMatrixOnly.__init__" title="Permalink to this definition">¶</a></dt>
@@ -304,7 +297,6 @@ contained in self._file.</p>
 
 </dd></dl>
 
-</div>
 <span class="target" id="module-gfunc.parsers.MAST"></span><div class="section" id="mast-py">
 <h3>MAST.py<a class="headerlink" href="#mast-py" title="Permalink to this headline">¶</a></h3>
 <p>Code supporting parsing of MAST type raw data files.</p>
@@ -555,11 +547,11 @@ it responts to <tt class="docutils literal"><span class="pre">urllib2.urlopen(ur
 </dl>
 <dl class="class">
 <dt id="gfunc.ensembl_data.DataGrabber">
-<em class="property">class </em><tt class="descclassname">gfunc.ensembl_data.</tt><tt class="descname">DataGrabber</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">gfunc.ensembl_data.</tt><tt class="descname">DataGrabber</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to manage conecting to ensembl-based ftp data dumps and retrieving them.</p>
 <dl class="method">
 <dt id="gfunc.ensembl_data.DataGrabber.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>base_url</em>, <em>species</em>, <em>data_types</em>, <em>base_local_path</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.DataGrabber.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiate DataGrabber object for conecting to ensembl-based ftp data dumps.</p>
 </dd></dl>
 
@@ -602,68 +594,6 @@ with extentions suggesting they are compressed.</li>
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="function">
-<dt id="gfunc.ensembl_data.check_files">
-<tt class="descclassname">gfunc.ensembl_data.</tt><tt class="descname">check_files</tt><big>(</big><em>dir_path</em>, <em>cksum_data</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.check_files" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">dir_path</span></tt> = path to a directory containing files to be validated</li>
-<li><tt class="docutils literal"><span class="pre">cksum_data</span></tt> = parsed contents of the CHECKSUMS file for this directory</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last simple">
-<li>Compares files in the directory with checksums in the CHECKSUMS file and scores them as PASS/FAIL</li>
-<li>Documents and classifies discrepancies between files listed in CHECKSUMS file vs files actually
-in the directory: classifies them as NOT_IN_CHECKSUMS or NOT_IN_DIR.</li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">results</span></tt> = list of strings</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="gfunc.ensembl_data.validate_downloads">
-<tt class="descclassname">gfunc.ensembl_data.</tt><tt class="descname">validate_downloads</tt><big>(</big><em>base_dir</em><big>)</big><a class="headerlink" href="#gfunc.ensembl_data.validate_downloads" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">base_dir</span></tt> = top-level directory containing files to be validated.</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last">
-<li><p class="first">Decends into <tt class="docutils literal"><span class="pre">base_dir</span></tt> and records paths to all lower-level files.</p>
-</li>
-<li><p class="first">Uses the CHECKSUMS files it finds to set up external system calls to <tt class="docutils literal"><span class="pre">sum</span></tt>
-for each file listed in the direcory&#8217;s CHECKSUMS file.</p>
-</li>
-<li><dl class="first docutils">
-<dt>A file named VALIDATIONS is created in each directory listing each file in the directory and one of the following outcomes: </dt>
-<dd><ul class="first last simple">
-<li>PASS = passed checksum match</li>
-<li>FAIL = failed checksum match</li>
-<li>NOT_IN_CHECKSUMS = file found in directory but NOT listed in the CHECKSUMS file</li>
-<li>NOT_IN_DIR = file listed in CHECKSUMS file, but not found in the directory.</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">results</span></tt> = a summary of all VALIDATIONS files (list of strings)</li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="function">
@@ -725,22 +655,13 @@ collected below <tt class="docutils literal"><span class="pre">base_url</span></
 
 <dl class="exception">
 <dt id="gfunc.errors.SystemCallError">
-<em class="property">exception </em><tt class="descclassname">gfunc.errors.</tt><tt class="descname">SystemCallError</tt><big>(</big><em>errno</em>, <em>strerror</em>, <em>filename=None</em><big>)</big><a class="headerlink" href="#gfunc.errors.SystemCallError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Error raised when a problem occurs while attempting to run an external system call.</p>
+<em class="property">exception </em><tt class="descclassname">gfunc.errors.</tt><tt class="descname">SystemCallError</tt><a class="headerlink" href="#gfunc.errors.SystemCallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception raised when a problem occurs while attempting to run an external system call.</p>
 <dl class="docutils">
 <dt>Attributes:</dt>
-<dd><div class="first last line-block">
-<div class="line"><tt class="docutils literal"><span class="pre">errno</span></tt> &#8211; return code from system call</div>
-<div class="line"><tt class="docutils literal"><span class="pre">filename</span></tt> &#8211; file in volved if any</div>
-<div class="line"><tt class="docutils literal"><span class="pre">strerror</span></tt> &#8211; error msg </div>
-</div>
-</dd>
+<dd>expr &#8211; input expression in which the error occurred
+msg  &#8211; explanation of the error</dd>
 </dl>
-<dl class="method">
-<dt id="gfunc.errors.SystemCallError.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>errno</em>, <em>strerror</em>, <em>filename=None</em><big>)</big><a class="headerlink" href="#gfunc.errors.SystemCallError.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="exception">
@@ -896,110 +817,13 @@ GFuncNode objects.</p>
 
 <dl class="function">
 <dt id="gfunc.maths.weight_d_for_ptci">
-<tt class="descclassname">gfunc.maths.</tt><tt class="descname">weight_d_for_ptci</tt><big>(</big><em>d_i</em>, <em>d_min</em>, <em>d_max</em>, <em>w_min=1.0</em>, <em>w_max=1.1</em><big>)</big><a class="headerlink" href="#gfunc.maths.weight_d_for_ptci" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">gfunc.maths.</tt><tt class="descname">weight_d_for_ptci</tt><big>(</big><em>d_i</em>, <em>d_min</em>, <em>d_max</em>, <em>w_min=1.0</em>, <em>w_max=1.1000000000000001</em><big>)</big><a class="headerlink" href="#gfunc.maths.weight_d_for_ptci" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scaling function to transform &#8216;d&#8217; onto a weight-spectrum to either
 punish or reward the final ptci score based on the phylogenetic distance
 between the two current species as it relates to the range of phylogenetic
 distances in the data set.</p>
 <p>Default weight scale is no change for the shortest distance (return 1.0) to
 a 10% reward for the longest distance (return 1.1).</p>
-</dd></dl>
-
-</div>
-<span class="target" id="module-gfunc.motifs"></span><div class="section" id="motifs-py">
-<h2>motifs.py<a class="headerlink" href="#motifs-py" title="Permalink to this headline">¶</a></h2>
-<p>Code supporting the searching, recording, and analysis of sequence motifs for gFunc.</p>
-<dl class="function">
-<dt id="gfunc.motifs.load_MOODS_result">
-<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">load_MOODS_result</tt><big>(</big><em>in_path</em><big>)</big><a class="headerlink" href="#gfunc.motifs.load_MOODS_result" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">in_path</span></tt>: path to store results</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last simple">
-<li>loads <tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt> from binary pickle to <tt class="docutils literal"><span class="pre">in_path</span></tt>.</li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li>un-pickled MOODS result object.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="gfunc.motifs.motif_profiles_weighted_by_score">
-<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">motif_profiles_weighted_by_score</tt><big>(</big><em>processed_moods_result_dict</em><big>)</big><a class="headerlink" href="#gfunc.motifs.motif_profiles_weighted_by_score" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li>processed_moods_result_dict: output from (def <tt class="docutils literal"><span class="pre">process_MOODS_results()</span></tt>)</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last simple">
-<li>iterates through <tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt> and calculates a motif presence score (mps)
-for each motifName:seqName pair by summing the all positive <tt class="docutils literal"><span class="pre">site_scores</span></tt> for motifName in seqName.</li>
-<li>mps are recorded in a <tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt> with columns = motifName and indexs = seqName.</li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li>mps_table: <tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt> constructed as above.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="gfunc.motifs.process_MOODS_results">
-<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">process_MOODS_results</tt><big>(</big><em>moods_result_dict</em>, <em>motif_names</em><big>)</big><a class="headerlink" href="#gfunc.motifs.process_MOODS_results" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">moods_result_dict</span></tt>: orderedDict ???is this true??? of moods_results_tuples keyed by seqName/geneName</li>
-<li><tt class="docutils literal"><span class="pre">motif_names</span></tt>: correctly ordered motif names (Motifs.motifs.keys())</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last simple">
-<li>converts <tt class="docutils literal"><span class="pre">moods_result_dict</span></tt> into a three key&#8217;d multi-level dict as follows:
-<tt class="docutils literal"><span class="pre">processed_moods_result_dict[SeqName][motifName][location]</span> <span class="pre">=</span> <span class="pre">score</span></tt></li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">processed_moods_result_dict</span></tt></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="gfunc.motifs.save_MOODS_result">
-<tt class="descclassname">gfunc.motifs.</tt><tt class="descname">save_MOODS_result</tt><big>(</big><em>moods_hits</em>, <em>out_path</em><big>)</big><a class="headerlink" href="#gfunc.motifs.save_MOODS_result" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>GIVEN:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">moods_hits</span></tt>: non-processed result from <tt class="docutils literal"><span class="pre">Motif.scan_seq()</span></tt> or <tt class="docutils literal"><span class="pre">Motif.scan_seqDict()</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">out_path</span></tt>: path to store results</li>
-</ul>
-</dd>
-<dt><em>DOES:</em></dt>
-<dd><ul class="first last simple">
-<li>stores <tt class="docutils literal"><span class="pre">moods_hits</span></tt> as binary pickle to <tt class="docutils literal"><span class="pre">out_path</span></tt>.</li>
-</ul>
-</dd>
-<dt><em>RETURNS:</em></dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">None</span></tt></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </div>
@@ -1174,7 +998,6 @@ the actual SE as <tt class="docutils literal"><span class="pre">reps</span></tt>
 <li><a class="reference internal" href="#edge-lists-py">edge_lists.py</a></li>
 <li><a class="reference internal" href="#ete-py">ETE.py</a></li>
 <li><a class="reference internal" href="#gtf-py">GTF.py</a></li>
-<li><a class="reference internal" href="#jaspar-py">JASPAR.py</a></li>
 <li><a class="reference internal" href="#mast-py">MAST.py</a></li>
 </ul>
 </li>
@@ -1187,7 +1010,6 @@ the actual SE as <tt class="docutils literal"><span class="pre">reps</span></tt>
 <li><a class="reference internal" href="#fileio-py">fileIO.py</a></li>
 <li><a class="reference internal" href="#graphtools-py">graphTools.py</a></li>
 <li><a class="reference internal" href="#maths-py">maths.py</a></li>
-<li><a class="reference internal" href="#motifs-py">motifs.py</a></li>
 <li><a class="reference internal" href="#stats-py">stats.py</a></li>
 <li><a class="reference internal" href="#galaxy-tools">galaxy_tools</a></li>
 </ul>
@@ -1205,7 +1027,7 @@ the actual SE as <tt class="docutils literal"><span class="pre">reps</span></tt>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" size="18" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1231,12 +1053,12 @@ the actual SE as <tt class="docutils literal"><span class="pre">reps</span></tt>
         <li class="right" >
           <a href="project.html" title="Project Summary"
              >previous</a> |</li>
-        <li><a href="index.html">gFunc 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">gFunc v0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Augustine (Gus) Dunn.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>

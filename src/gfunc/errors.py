@@ -10,21 +10,30 @@ class GFuncError(StandardError):
     pass
 
 
+
+
 class SystemCallError(GFuncError):
-    """Exception raised when a problem occurs while attempting to run an external system call.
-    
+    """Error raised when a problem occurs while attempting to run an external system call.
+
     Attributes:
-        expr -- input expression in which the error occurred
-        msg  -- explanation of the error"""
+        | ``errno`` -- return code from system call
+        | ``filename`` -- file in volved if any
+        | ``strerror`` -- error msg """
+    
+    def __init__(self,errno,strerror,filename=None):
+        self.errno = errno
+        self.strerror = strerror
+        self.filename = filename
+        
     def __str__(self):
         if not self.filename: 
-            return """ERROR: %s.\nRETURN_STATE: %s.""" % (self.strerror.strip('\n'),
+            return """ERROR:\n %s.\nRETURN_STATE: %s.""" % (self.strerror.strip('\n'),
                                                           self.errno)
         else: 
-            return """ERROR in %s: %s.\nRETURN_STATE: %s.""" % (self.filename,
+            return """ERROR in %s:\n %s.\nRETURN_STATE: %s.""" % (self.filename,
                                                                 self.strerror.strip('\n'),
                                                                 self.errno)
-        
+
 class UnsatisfiedDependencyError(GFuncError):
     """Exception raised when gFunc can not find a suitable option to satisfy an external dependency."""
     def __str__(self):

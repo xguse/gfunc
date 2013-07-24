@@ -63,7 +63,7 @@ def edge_correlation(gFunc_edge):
 
 ######################## START CALC  PTCI LAND ######################################
 
-def calc_ptci_rpd(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_rpd(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -73,13 +73,13 @@ def calc_ptci_rpd(gFunc_edge,w_min=1.0,w_max=1.1):
         p_val = gFunc_edge.data.p_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return r_val * (1-p_val) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return r_val * (1-p_val) * scale_the_d(d_val,d_min,d_max) 
     
     except (TypeError,AttributeError):
         return None
 
 
-def calc_ptci_rd(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_rd(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -88,12 +88,12 @@ def calc_ptci_rd(gFunc_edge,w_min=1.0,w_max=1.1):
         r_val = gFunc_edge.data.r_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return r_val * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return r_val * scale_the_d(d_val,d_min,d_max) 
     
     except (TypeError,AttributeError):
         return None
         
-def calc_ptci_zd(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_zd(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -102,12 +102,12 @@ def calc_ptci_zd(gFunc_edge,w_min=1.0,w_max=1.1):
         z_val = gFunc_edge.data.z_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return z_val * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return z_val * scale_the_d(d_val,d_min,d_max) 
     
     except (TypeError,AttributeError):
         return None
 
-def calc_ptci_zpd(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_zpd(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -117,12 +117,12 @@ def calc_ptci_zpd(gFunc_edge,w_min=1.0,w_max=1.1):
         p_val = gFunc_edge.data.p_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return z_val * (1-p_val) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return z_val * (1-p_val) * scale_the_d(d_val,d_min,d_max) 
     
     except (TypeError,AttributeError):
         return None
 
-def calc_ptci_z(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_z(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -135,7 +135,7 @@ def calc_ptci_z(gFunc_edge,w_min=1.0,w_max=1.1):
     except (TypeError,AttributeError):
         return None
 
-def calc_ptci_r(gFunc_edge,w_min=1.0,w_max=1.1):
+def calc_ptci_r(gFunc_edge):
     """
     calculate the PTCI
     edge_correlation() should already have been run
@@ -152,7 +152,7 @@ def calc_ptci_r(gFunc_edge,w_min=1.0,w_max=1.1):
 
 
 
-def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
+def get_ptci(gFunc_edge,kind='rpd'):
     """
     calculate and store 
     """
@@ -163,7 +163,7 @@ def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
                         'r'   : calc_ptci_r,
                         'z'   : calc_ptci_z })
     
-    ptci = ptci_kind[kind](gFunc_edge,w_min,w_max)
+    ptci = ptci_kind[kind](gFunc_edge)
     
     if not is_none_or_nan(ptci):
         # If we get a valid ptci store the value in the gFunc_edge object and also return it

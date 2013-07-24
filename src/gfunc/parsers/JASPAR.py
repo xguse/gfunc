@@ -1,3 +1,10 @@
+"""
+####################
+JASPAR.py
+####################
+Code supporting reading and writing of basic PSSMs and putative TFBS binding locations; especially in JASPAR format.
+"""
+
 try:
     from collections import OrderedDict
 except ImportError:
@@ -49,17 +56,20 @@ class BasicTFBSParser(GFuncParserBase):
 class ParseJasparMatrixOnly(object):
     """
     Returns a record-by-record motif parser for JASPAR matric_only.txt files analogous to file.readline().
-    example:
-    >MA0001.1 AGL3
-    A  [ 0  3 79 40 66 48 65 11 65  0 ]
-    C  [94 75  4  3  1  2  5  2  3  3 ]
-    G  [ 1  0  3  4  1  0  5  3 28 88 ]
-    T  [ 2 19 11 50 29 47 22 81  1  6 ]
-    >MA0002.1 RUNX1
-    A  [10 12  4  1  2  2  0  0  0  8 13 ]
-    C  [ 2  2  7  1  0  8  0  0  1  2  2 ]
-    G  [ 3  1  1  0 23  0 26 26  0  0  4 ]
-    T  [11 11 14 24  1 16  0  0 25 16  7 ]
+    
+    File Example: ::
+    
+        >MA0001.1 AGL3
+        A  [ 0  3 79 40 66 48 65 11 65  0 ]
+        C  [94 75  4  3  1  2  5  2  3  3 ]
+        G  [ 1  0  3  4  1  0  5  3 28 88 ]
+        T  [ 2 19 11 50 29 47 22 81  1  6 ]
+        >MA0002.1 RUNX1
+        A  [10 12  4  1  2  2  0  0  0  8 13 ]
+        C  [ 2  2  7  1  0  8  0  0  1  2  2 ]
+        G  [ 3  1  1  0 23  0 26 26  0  0  4 ]
+        T  [11 11 14 24  1 16  0  0 25 16  7 ]
+
     """
     def __init__(self,filePath):
         """Returns a record-by-record motif parser analogous to file.readline().
@@ -82,17 +92,18 @@ class ParseJasparMatrixOnly(object):
     
     def _recData2array(self,recData):
         """
-        Converts lines like this:
-        A  [ 0  3 79 40 66 48 65 11 65  0 ]
-        C  [94 75  4  3  1  2  5  2  3  3 ]
-        G  [ 1  0  3  4  1  0  5  3 28 88 ]
-        T  [ 2 19 11 50 29 47 22 81  1  6 ] 
+        Converts lines like this: ::
         
-        to a 2D list like this:
-        [[ 0,  3, 79, 40, 66, 48, 65, 11, 65,  0 ],
-        [94, 75,  4,  3,  1,  2,  5,  2,  3,  3 ],
-        [.],
-        [.]]
+            A  [ 0  3 79 40 66 48 65 11 65  0 ]
+            C  [94 75  4  3  1  2  5  2  3  3 ]
+            G  [ 1  0  3  4  1  0  5  3 28 88 ]
+            T  [ 2 19 11 50 29 47 22 81  1  6 ] 
+            
+            to a 2D list like this:
+            [[ 0, 3,79, 40, 66, 48, 65, 11, 65, 0],
+             [94, 75, 4, 3, 1, 2, 5, 2, 3, 3],
+             [1,  0, 3, 4, 1, 0, 5, 3, 28, 88],
+             [2, 19, 11, 50, 29, 47, 22, 81, 1, 6]]
          
         Returns 2D list.
         """

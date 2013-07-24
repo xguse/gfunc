@@ -42,6 +42,6 @@ def walk_dirs_for_fileName(dir_path,pattern="*.xml"):
             file_paths.append(os.path.join(root, filename))
             
         for sub_dir in dirs:
-            file_paths.append(walk_dirs_for_fileName(sub_dir,pattern))
+            file_paths.extend(walk_dirs_for_fileName(sub_dir,pattern))
             
     return file_paths

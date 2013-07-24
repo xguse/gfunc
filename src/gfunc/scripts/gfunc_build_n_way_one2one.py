@@ -432,14 +432,12 @@ def construct_builder_and_handler(parser_list):
 
 def reset_random_edges(gHandler,gBuilder,n_way_ortho_table,ortho_parser):
     """
-    *DOES:*
-        * deletes current edge connections/objects in gHandler.graph
-        * randomizes n-way 1:1 ortholog sets such that actual orthology
-          is lost but each ortho-set still contains one gene from each species.
-        * rebuilds edge connections/objects in edge_dict and gHandler.graph
+    * deletes current edge connections/objects in gHandler.graph
+    * randomizes n-way 1:1 ortholog sets such that actual orthology
+      is lost but each ortho-set still contains one gene from each species.
+    * rebuilds edge connections/objects in edge_dict and gHandler.graph
     
-    *RETURNS:*
-        * None
+    :returns: ``None``
     """
     
     graph = gHandler.graph
@@ -551,7 +549,7 @@ def main():
     
     #ptci_dicts = [scored_orthos]
     
-    #n_way_ortho_table= pandas.read_table(yopts.edge_data.one_to_one_ortholog_list)
+    n_way_ortho_table= pandas.read_table(yopts.edge_data.one_to_one_ortholog_list)
     #for rep in range(100):
         #reset_random_edges(gHandler,gBuilder,n_way_ortho_table,ortho_parser)
         #gHandler.measure_relations()
@@ -616,7 +614,7 @@ def main():
     
     expn_dataFrame = to_dataFrame_from_node(graph=gHandler.graph,data_func=data_func,index_func=index_func,column_func=None)
     
-    return gHandler,expn_dataFrame
+    return gHandler,gBuilder,n_way_ortho_table,ortho_parser
     
     # dump built construct as pickle
     #cPickle.dump(gHandler,open(yopts.outputs.graph_pickle,'w'))

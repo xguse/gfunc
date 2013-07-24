@@ -1,0 +1,194 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter {Symbols}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.BranchLength method), \hyperpage{10}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.ExpressionSimilarity method), \hyperpage{10}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.Metric method), \hyperpage{10}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.PhyloExpnCorrelationIndex method), \hyperpage{10}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.RelationsHandler method), \hyperpage{11}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.TFBSSimilarity method), \hyperpage{11}
+  \item \_\_init\_\_() (gfunc.analysis\_classes.VoteHandler method), \hyperpage{11}
+  \item \_\_init\_\_() (gfunc.data\_classes.Bunch method), \hyperpage{11}
+  \item \_\_init\_\_() (gfunc.data\_classes.GFuncEdge method), \hyperpage{11}
+  \item \_\_init\_\_() (gfunc.data\_classes.GFuncNode method), \hyperpage{12}
+  \item \_\_init\_\_() (gfunc.ensembl\_data.DataGrabber method), \hyperpage{12}
+  \item \_\_init\_\_() (gfunc.errors.SystemCallError method), \hyperpage{14}
+  \item \_\_init\_\_() (gfunc.graphTools.GraphBuilder method), \hyperpage{15}
+  \item \_\_init\_\_() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+  \item \_\_init\_\_() (gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser method), \hyperpage{7}
+  \item \_\_init\_\_() (gfunc.parsers.ETE.PhyloXMLParser method), \hyperpage{8}
+  \item \_\_init\_\_() (gfunc.parsers.JASPAR.BasicTFBSParser method), \hyperpage{9}
+  \item \_\_init\_\_() (gfunc.parsers.JASPAR.ParseJasparMatrixOnly method), \hyperpage{10}
+  \item \_\_init\_\_() (gfunc.parsers.edge\_lists.OneToOneOrthoListParser method), \hyperpage{8}
+
+  \indexspace
+  \bigletter A
+  \item am\_i\_sigDiff() (in module gfunc.parsers.Cufflinks), \hyperpage{7}
+
+  \indexspace
+  \bigletter B
+  \item basic\_bootstrap\_est() (in module gfunc.stats), \hyperpage{17}
+  \item BasicTFBSParser (class in gfunc.parsers.JASPAR), \hyperpage{9}
+  \item bayesian\_score() (in module gfunc.maths), \hyperpage{15}
+  \item benjHochFDR() (in module gfunc.stats), \hyperpage{17}
+  \item binComb() (in module gfunc.stats), \hyperpage{17}
+  \item binomialPval() (in module gfunc.stats), \hyperpage{18}
+  \item binomialPval\_gte() (in module gfunc.stats), \hyperpage{18}
+  \item BranchLength (class in gfunc.analysis\_classes), \hyperpage{10}
+  \item build\_expDiffTable\_dict() (in module gfunc.parsers.Cufflinks), \hyperpage{8}
+  \item Bunch (class in gfunc.data\_classes), \hyperpage{11}
+  \item bunchify() (in module gfunc.data\_classes), \hyperpage{12}
+
+  \indexspace
+  \bigletter C
+  \item CDiffFpkmTrackerParser (class in gfunc.parsers.Cufflinks), \hyperpage{7}
+  \item check\_files() (in module gfunc.ensembl\_data), \hyperpage{12}
+  \item clone\_node\_as\_target() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+  \item combine\_multiple\_one2one\_tables() (in module gfunc.parsers.edge\_lists), \hyperpage{8}
+  \item cumHypergeoP() (in module gfunc.stats), \hyperpage{18}
+
+  \indexspace
+  \bigletter D
+  \item DataGrabber (class in gfunc.ensembl\_data), \hyperpage{12}
+
+  \indexspace
+  \bigletter E
+  \item ExpressionSimilarity (class in gfunc.analysis\_classes), \hyperpage{10}
+
+  \indexspace
+  \bigletter F
+  \item follow\_all\_links() (in module gfunc.parsers.edge\_lists), \hyperpage{8}
+
+  \indexspace
+  \bigletter G
+  \item get\_copy() (gfunc.data\_classes.GFuncNode method), \hyperpage{12}
+  \item get\_distance() (gfunc.parsers.ETE.PhyloXMLParser method), \hyperpage{9}
+  \item get\_species() (gfunc.parsers.ETE.PhyloXMLParser method), \hyperpage{9}
+  \item get\_sub\_scores() (gfunc.data\_classes.GFuncNode method), \hyperpage{12}
+  \item get\_vote\_types() (gfunc.analysis\_classes.RelationsHandler method), \hyperpage{11}
+  \item gfunc.\_\_init\_\_ (module), \hyperpage{7}
+  \item gfunc.analysis\_classes (module), \hyperpage{10}
+  \item gfunc.clustering (module), \hyperpage{11}
+  \item gfunc.data\_classes (module), \hyperpage{11}
+  \item gfunc.ensembl\_data (module), \hyperpage{12}
+  \item gfunc.errors (module), \hyperpage{14}
+  \item gfunc.externals (module), \hyperpage{14}
+  \item gfunc.fdr (module), \hyperpage{14}
+  \item gfunc.fileIO (module), \hyperpage{14}
+  \item gfunc.galaxy\_tools (module), \hyperpage{19}
+  \item gfunc.graphTools (module), \hyperpage{15}
+  \item gfunc.maths (module), \hyperpage{15}
+  \item gfunc.motifs (module), \hyperpage{16}
+  \item gfunc.parsers.\_\_init\_\_ (module), \hyperpage{7}
+  \item gfunc.parsers.base (module), \hyperpage{7}
+  \item gfunc.parsers.Cufflinks (module), \hyperpage{7}
+  \item gfunc.parsers.edge\_lists (module), \hyperpage{8}
+  \item gfunc.parsers.ETE (module), \hyperpage{8}
+  \item gfunc.parsers.GTF (module), \hyperpage{9}
+  \item gfunc.parsers.JASPAR (module), \hyperpage{9}
+  \item gfunc.parsers.MAST (module), \hyperpage{10}
+  \item gfunc.stats (module), \hyperpage{17}
+  \item gfunc.xpermutations (module), \hyperpage{19}
+  \item GFuncEdge (class in gfunc.data\_classes), \hyperpage{11}
+  \item GFuncError, \hyperpage{14}
+  \item GFuncNode (class in gfunc.data\_classes), \hyperpage{12}
+  \item GFuncParserBase (class in gfunc.parsers.base), \hyperpage{7}
+  \item GraphBuilder (class in gfunc.graphTools), \hyperpage{15}
+  \item GraphHandler (class in gfunc.graphTools), \hyperpage{15}
+
+  \indexspace
+  \bigletter H
+  \item hypergeoP() (in module gfunc.stats), \hyperpage{18}
+
+  \indexspace
+  \bigletter I
+  \item install\_metric\_handlers() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+  \item install\_target() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+
+  \indexspace
+  \bigletter L
+  \item load\_MOODS\_result() (in module gfunc.motifs), \hyperpage{16}
+  \item load\_phyloXMLs() (in module gfunc.parsers.ETE), \hyperpage{9}
+
+  \indexspace
+  \bigletter M
+  \item map\_registries\_to\_graph() (gfunc.graphTools.GraphBuilder method), \hyperpage{15}
+  \item mean() (gfunc.analysis\_classes.Metric method), \hyperpage{10}
+  \item measure\_relation() (gfunc.analysis\_classes.BranchLength method), \hyperpage{10}
+  \item measure\_relation() (gfunc.analysis\_classes.Metric method), \hyperpage{10}
+  \item measure\_relations() (gfunc.analysis\_classes.RelationsHandler method), \hyperpage{11}
+  \item measure\_relations() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+  \item median() (gfunc.analysis\_classes.Metric method), \hyperpage{10}
+  \item Metric (class in gfunc.analysis\_classes), \hyperpage{10}
+  \item mkdirp() (in module gfunc.externals), \hyperpage{14}
+  \item motif\_profiles\_weighted\_by\_score() (in module gfunc.motifs), \hyperpage{16}
+
+  \indexspace
+  \bigletter N
+  \item next() (gfunc.parsers.JASPAR.ParseJasparMatrixOnly method), \hyperpage{10}
+
+  \indexspace
+  \bigletter O
+  \item OneToOneOrthoListParser (class in gfunc.parsers.edge\_lists), \hyperpage{8}
+
+  \indexspace
+  \bigletter P
+  \item ParseJasparMatrixOnly (class in gfunc.parsers.JASPAR), \hyperpage{9}
+  \item PhyloExpnCorrelationIndex (class in gfunc.analysis\_classes), \hyperpage{10}
+  \item PhyloXMLParser (class in gfunc.parsers.ETE), \hyperpage{8}
+  \item plot\_centers\_and\_points() (in module gfunc.clustering), \hyperpage{11}
+  \item populate\_registries() (gfunc.graphTools.GraphBuilder method), \hyperpage{15}
+  \item process\_MOODS\_results() (in module gfunc.motifs), \hyperpage{16}
+  \item prune\_trees\_by\_species() (in module gfunc.parsers.ETE), \hyperpage{9}
+
+  \indexspace
+  \bigletter R
+  \item RelationsHandler (class in gfunc.analysis\_classes), \hyperpage{11}
+  \item resgister\_nodes\_and\_edges() (gfunc.parsers.Cufflinks.CDiffFpkmTrackerParser method), 
+		\hyperpage{7}
+  \item resgister\_nodes\_and\_edges() (gfunc.parsers.edge\_lists.OneToOneOrthoListParser method), 
+		\hyperpage{8}
+  \item resgister\_nodes\_and\_edges() (gfunc.parsers.ETE.PhyloXMLParser method), \hyperpage{9}
+  \item resgister\_nodes\_and\_edges() (gfunc.parsers.JASPAR.BasicTFBSParser method), \hyperpage{9}
+  \item runExternalApp() (in module gfunc.externals), \hyperpage{14}
+
+  \indexspace
+  \bigletter S
+  \item save\_MOODS\_result() (in module gfunc.motifs), \hyperpage{17}
+  \item set\_data() (gfunc.data\_classes.GFuncEdge method), \hyperpage{11}
+  \item set\_data() (gfunc.data\_classes.GFuncNode method), \hyperpage{12}
+  \item set\_vote\_types() (gfunc.analysis\_classes.VoteHandler method), \hyperpage{11}
+  \item settings() (gfunc.ensembl\_data.DataGrabber method), \hyperpage{12}
+  \item shuffle\_dict() (in module gfunc.fdr), \hyperpage{14}
+  \item SystemCallError, \hyperpage{14}
+
+  \indexspace
+  \bigletter T
+  \item tableFile2namedTuple() (in module gfunc.fileIO), \hyperpage{15}
+  \item take\_votes() (gfunc.analysis\_classes.VoteHandler method), \hyperpage{11}
+  \item take\_votes() (gfunc.graphTools.GraphHandler method), \hyperpage{15}
+  \item TFBSSimilarity (class in gfunc.analysis\_classes), \hyperpage{11}
+  \item to\_dict() (gfunc.parsers.JASPAR.ParseJasparMatrixOnly method), \hyperpage{10}
+  \item total\_votes() (gfunc.data\_classes.GFuncNode method), \hyperpage{12}
+  \item transfer\_data() (gfunc.ensembl\_data.DataGrabber method), \hyperpage{12}
+  \item transfer\_nearestRefgeneSymbol\_from\_isoform\_to\_gene\_tracking() (in module gfunc.parsers.Cufflinks), 
+		\hyperpage{8}
+
+  \indexspace
+  \bigletter U
+  \item UnsatisfiedDependencyError, \hyperpage{14}
+
+  \indexspace
+  \bigletter V
+  \item validate\_downloads() (in module gfunc.ensembl\_data), \hyperpage{13}
+  \item VoteHandler (class in gfunc.analysis\_classes), \hyperpage{11}
+
+  \indexspace
+  \bigletter W
+  \item walk\_dirs\_for\_fileName() (in module gfunc.fileIO), \hyperpage{15}
+  \item web\_ls() (in module gfunc.ensembl\_data), \hyperpage{13}
+  \item web\_walk() (in module gfunc.ensembl\_data), \hyperpage{13}
+  \item weight\_d\_for\_ptci() (in module gfunc.maths), \hyperpage{16}
+
+\end{theindex}

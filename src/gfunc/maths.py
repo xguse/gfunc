@@ -39,3 +39,18 @@ def weight_d_for_ptci(d_i,d_min,d_max,w_min=1.0,w_max=1.1):
         raise ValueError("d_i (%s) is outside of range (%s to %s)" % (d_i,d_min,d_max))
     
     return ((d_i-d_min)*(w_max-w_min))/(d_max-d_min) + w_min
+
+def convert_to_z_scores(data_vector):
+    vec_mean = np.mean(data_vector)
+    vec_median = np.median(data_vector)
+    vec_stdev = np.std(data_vector)
+    
+    z_vector = (data_vector - vec_median) / (vec_stdev)
+    return z_vector
+
+def get_z_score_stats(data_vector):
+    vec_mean = np.mean(data_vector)
+    vec_median = np.median(data_vector)
+    vec_stdev = np.std(data_vector)
+    
+    return vec_mean,vec_median,vec_stdev
