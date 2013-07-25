@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 
 
-version = '0.0.1'
+version = '0.0.0'
 
 install_requires = [
     # List your project dependencies here.
@@ -17,16 +17,16 @@ install_requires = [
 
 setup(name='gfunc',
     version=version,
-    description="",
+    description="[coming soon] gFunc: functional genomics using graphs for integration of many Omics data types",
     long_description=README + '\n\n' + NEWS,
     classifiers=[
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     ],
-    keywords='',
-    author='',
-    author_email='',
-    url='',
-    license='',
+    keywords='graphs bioinformatics genomics functional',
+    author='Augustine Dunn',
+    author_email='wadunn83@gmail.com',
+    url='https://github.com/xguse',
+    license='GPL3',
     packages=find_packages('src'),
     package_dir = {'': 'src'},include_package_data=True,
     zip_safe=False,
