@@ -271,13 +271,17 @@ class ExpressionSimilarity(Metric):
             # return r_val scaled to between 0 and 1
             #scaled_rVal = (r_val+1)/2
             return r_val     
-        except AttributeError as err:
+        except (AttributeError,FloatingPointError) as err:
             if """'Bunch' object has no attribute""" in err.message:
                 # TODO: Should I return these or just leave the value unset?
                 # for now its left unset.
-                r_val = float('nan')
-                p_val = float('nan')
+                r_val = np.nan
+                p_val = np.nan
                 return r_val
+            elif FloatingPointError == type(err):
+                r_val = np.nan
+                p_val = np.nan
+                return r_val                
             else:
                 raise err
         

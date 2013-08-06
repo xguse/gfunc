@@ -185,10 +185,12 @@ def am_i_sigDiff(xloc_number, expDiffTable_dict, q_thresh):
     |     Else Return ``False``
         
     """
-    q_vals = [float(x.q_value) for x in expDiffTable_dict[xloc_number]]
-    
-    if min(q_vals) <= q_thresh:
-        return True
-    else:
-        return False
-    
+    try:
+        q_vals = [float(x.q_value) for x in expDiffTable_dict[xloc_number]]
+        
+        if min(q_vals) <= q_thresh:
+            return True
+        else:
+            return False
+    except TypeError:
+        return None

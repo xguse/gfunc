@@ -123,8 +123,11 @@ class Motifs(object):
         *RETURNS:*
             * len(``self.motifs``)
         """
-        return len(self.motifs)
-    
+        try:
+            return len(self.motifs)
+        except AttributeError:
+            return 0
+        
     def load_JASPAR_motifs(self,pwm_file):
         """
         *GIVEN:*

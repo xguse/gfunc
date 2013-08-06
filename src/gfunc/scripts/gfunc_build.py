@@ -40,9 +40,9 @@ def setup_parsers(yopts):
     y = yopts
     parser_list = []
     
-    parser_list.append(CDiffFpkmTrackerParser(cuffdiff_path=y.species_info.Anopheles_gambiae.expresion_data,
+    parser_list.append(CDiffFpkmTrackerParser(cuffdiff_fpkm_path=y.species_info.Anopheles_gambiae.expresion_data,
                                               species=y.species_info.Anopheles_gambiae.name))
-    parser_list.append(CDiffFpkmTrackerParser(cuffdiff_path=y.species_info.Culex_quinquefasciatus.expresion_data,
+    parser_list.append(CDiffFpkmTrackerParser(cuffdiff_fpkm_path=y.species_info.Culex_quinquefasciatus.expresion_data,
                                               species=y.species_info.Culex_quinquefasciatus.name))
     
     parser_list.append(BasicTFBSParser(tfbs_path=y.species_info.Anopheles_gambiae.tfbs_data))
