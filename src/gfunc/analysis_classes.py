@@ -96,7 +96,7 @@ class VoteHandler(MetricHandler):
             return (scores*weights).sum()   # calculates weighted mean with proportional weights
         except:
             if len(a) == 0:
-                return float('nan')
+                return np.nan
             else:
                 raise
         
@@ -240,7 +240,7 @@ class PhyloExpnCorrelationIndex(Metric):
             return ptci
         except AttributeError as err:
             if """'Bunch' object has no attribute""" in err.message:
-                return float('nan')
+                return np.nan
             else:
                 raise err
 
@@ -266,7 +266,7 @@ class ExpressionSimilarity(Metric):
             # for now, all r_vals will be used
             # TODO: figure out whether that needs revising...
             ##if p_val > 0.1:
-                ##return float('nan')
+                ##return np.nan
             
             # return r_val scaled to between 0 and 1
             #scaled_rVal = (r_val+1)/2
@@ -302,22 +302,27 @@ class TFBSSimilarity(Metric):
         Does this metric's specific calculations.
         """
         node1,node2 = gfunc_edge.nodes
+        r_and_p = Bunch()
         try:
             r_val,p_val = sp_stats.pearsonr(node1.data.tfbs_vector, node2.data.tfbs_vector)
             # for now, all r_vals will be used
             # TODO: figure out whether that needs revising...
             ##if p_val > 0.1:
-                ##return float('nan')
+                ##return np.nan
             
             # return r_val scaled to between 0 and 1
             scaled_rVal = (r_val+1)/2
-            return r_val
+            r_and_p.r_val = r_val
+            r_and_p.p_val = p_val
+            
+            return r_and_p
         except AttributeError as err:
             if """'Bunch' object has no attribute""" in err.message:
                 # TODO: Should I return these or just leave the value unset?
-                r_val = float('nan')
-                p_val = float('nan')
-                return r_val
+                r_and_p.r_val = np.nan
+                r_and_p.p_val = np.nan
+                
+                return r_and_p
             else:
                 raise err
         

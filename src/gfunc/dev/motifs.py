@@ -26,7 +26,7 @@ def get_score_dataframe(processed_MOODS_results):
     
     dict_of_series_objects = {}  
     
-    for seq_name in processed_MOODS_results.keys():
+    for seq_name in sorted(processed_MOODS_results.keys()):
         # intialize pandas.Series(data, index) object and store in dict_of_series_objects
         data = []
         for motif_name in motif_names:
@@ -52,25 +52,6 @@ def get_standardized_score_dataframe(score_dataframe,center='mean'):
     else:
         raise ValueError('"center" must be either ["median","mean"].  You provided: %s.' % (center))
 
-def get_score_dataframe(processed_MOODS_results):
-    """
-    """
-    motif_names = sorted(processed_MOODS_results.values()[0].keys())
-    
-    dict_of_series_objects = {}  
-    
-    for seq_name in sorted(processed_MOODS_results.keys()):
-        # intialize pandas.Series(data, index) object and store in dict_of_series_objects
-        data = []
-        for motif_name in motif_names:
-            # for each motif sum all positive scores (log-odds)
-            # negative log-odds mean that the site has less than even odds of being the motif given the background
-            pos_log_odds = [ x for x in processed_MOODS_results[seq_name][motif_name].values() if x > 0 ]
-            data.append(np.sum(pos_log_odds))
-            
-        dict_of_series_objects[seq_name] = pandas.Series(data=data, index=motif_names)
-        
-    return pandas.DataFrame.from_dict(dict_of_series_objects,orient='index')
 
 def save_dataframe_to_motif_table(dataframe, species, out_path):
     """

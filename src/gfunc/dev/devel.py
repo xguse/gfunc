@@ -148,6 +148,63 @@ def calc_ptci_r(gFunc_edge,w_min=1.0,w_max=1.1):
     except (TypeError,AttributeError):
         return None
 
+def calc_ptci_rprd(gFunc_edge,w_min=1.0,w_max=1.1):
+    """
+    calculate the PTCI
+    edge_correlation() should already have been run
+    
+    NOTE: this adds tfbs similarity to the equation
+    """
+    try:
+        r_val_expn = gFunc_edge.data.r_val
+        p_val_expn = gFunc_edge.data.p_val
+        r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
+        d_val,d_min,d_max = gFunc_edge.data.divergence
+        
+        return (r_val_expn * (1-p_val_expn)) + r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+    
+    except (TypeError,AttributeError):
+        return None
+
+def calc_ptci_rprpd(gFunc_edge,w_min=1.0,w_max=1.1):
+    """
+    calculate the PTCI
+    edge_correlation() should already have been run
+    
+    NOTE: this adds tfbs similarity AND tfbs p of r to the equation
+    """
+    try:
+        r_val_expn = gFunc_edge.data.r_val
+        p_val_expn = gFunc_edge.data.p_val
+        r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
+        p_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.p_val
+        d_val,d_min,d_max = gFunc_edge.data.divergence
+        
+        return (r_val_expn * (1-p_val_expn)) + (r_val_tfbs * (p_val_tfbs)) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+    
+    except (TypeError,AttributeError):
+        return None
+
+
+def calc_ptci_rrd(gFunc_edge,w_min=1.0,w_max=1.1):
+    """
+    calculate the PTCI
+    edge_correlation() should already have been run
+    
+    NOTE: this adds tfbs similarity to the equation
+    """
+    try:
+        r_val_expn = gFunc_edge.data.r_val
+        p_val_expn = gFunc_edge.data.p_val
+        r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
+        d_val,d_min,d_max = gFunc_edge.data.divergence
+        
+        return r_val_expn + r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+    
+    except (TypeError,AttributeError):
+        return None
+
+
 ######################## END CALC PTCI LAND ######################################
 
 
@@ -156,9 +213,12 @@ def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
     """
     calculate and store 
     """
-    ptci_kind = Bunch({ 'rpd' : calc_ptci_rpd,
+    ptci_kind = Bunch({ 'rprpd' : calc_ptci_rprpd,
+                        'rprd' : calc_ptci_rprd,
+                        'rpd' : calc_ptci_rpd,
                         'zpd' : calc_ptci_zpd,
                         'rd'  : calc_ptci_rd,
+                        'rrd'  : calc_ptci_rrd,
                         'zd'  : calc_ptci_zd,
                         'r'   : calc_ptci_r,
                         'z'   : calc_ptci_z })
@@ -173,3 +233,8 @@ def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
         # If we get an invalid ptci, store it and return it as None
         gFunc_edge.data.PTCI = None
         return None
+
+
+def get_median_null_dist():
+    """
+    """

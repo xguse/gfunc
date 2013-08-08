@@ -20,6 +20,7 @@ from gfunc.analysis_classes import VoteHandler
 from gfunc.analysis_classes import ExpressionSimilarity,TFBSSimilarity,BranchLength
 from gfunc.graphTools import GraphBuilder
 from gfunc.graphTools import GraphHandler
+from gfunc.dev.devel import is_none_or_nan
 ##from gfunc.parsers.Cufflinks import CDiffFpkmTrackerParser
 ##from gfunc.parsers.ETE import PhyloXMLParser
 ##from gfunc.parsers.JASPAR import BasicTFBSParser
@@ -45,7 +46,20 @@ def calculate_straight_combo_score(node,gHandler):
     """
     """
     sub_scores = node.get_sub_scores(gHandler.target_node,gHandler.graph)
-    return np.mean([x for x in sub_scores if not np.isnan(x)])
+    
+    cleaned_sub_scores = []
+    
+
+    for sub_score in sub_scores:
+        try:
+            if not is_none_or_nan(sub_score):
+                cleaned_sub_scores.append(sub_score)
+            else:
+                pass
+        except FloatingPointError:
+            pass
+        
+    return np.mean(cleaned_sub_scores)
     
 def record_combo_scores(node_list,gHandler):
     """

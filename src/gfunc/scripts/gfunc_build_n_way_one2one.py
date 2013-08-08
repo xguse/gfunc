@@ -26,7 +26,7 @@ from gfunc.fileIO import tableFile2namedTuple
 from gfunc.data_classes import Bunch,bunchify
 from gfunc.analysis_classes import RelationsHandler
 from gfunc.analysis_classes import VoteHandler
-from gfunc.analysis_classes import PhyloExpnCorrelationIndex
+from gfunc.analysis_classes import PhyloExpnCorrelationIndex,TFBSSimilarity
 from gfunc.graphTools import GraphBuilder
 from gfunc.graphTools import GraphHandler
 from gfunc.parsers.Cufflinks import CDiffFpkmTrackerParser
@@ -382,6 +382,12 @@ def setup_parsers(yopts):
                                               name_col='nearest_ref_id',
                                               combine_transcripts=True,tx_2_gene=None))
     
+    parser_list.append(BasicTFBSParser(y.species_info.Aedes_aegypti.tfbs_data))
+    
+    parser_list.append(BasicTFBSParser(y.species_info.Anopheles_gambiae.tfbs_data))
+    
+    parser_list.append(BasicTFBSParser(y.species_info.Culex_quinquefasciatus.tfbs_data))
+    
    
 
     
@@ -403,7 +409,8 @@ def init_metrics():
     TODO: Make this 'smart' when you have more time. 
     """
     expression = PhyloExpnCorrelationIndex(poll_me=False)
-    return (expression,)
+    tfbs = TFBSSimilarity()
+    return (expression,tfbs)
 
 
 def construct_builder_and_handler(parser_list):
