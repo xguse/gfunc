@@ -6,6 +6,7 @@ Code under development before being placed in a logical location.
 """
 
 import numpy as np
+import pandas
 
 from scipy import stats as sp_stats
 
@@ -235,6 +236,15 @@ def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
         return None
 
 
-def get_median_null_dist():
+def get_null_bin_members_counts_dataframe(null_hist_data_list):
     """
     """
+    
+    n_dict = {}
+    for i,nHist_data in enumerate(null_hist_data_list):
+        n_dict['nd_%s' % (i)] = nHist_data[0]
+        
+    null_bin_members_counts = pandas.DataFrame(n_dict)
+    null_bin_members_counts = null_bin_members_counts.transpose()
+    
+    return null_bin_members_counts
