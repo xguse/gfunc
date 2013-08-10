@@ -195,3 +195,15 @@ def am_i_sigDiff(xloc_number, expDiffTable_dict, q_thresh):
             return False
     except TypeError:
         return None
+    
+def convert_to_old_cuffdiff_isoform_tracking(table_path):
+    """
+    reads in path to new cuffdiff iso fpkm tracking format (condition1_status .. conditionN_status)
+    to old format (only one 'status' column).  Sets new status column values all to 'NaN'
+    """
+    new = pd.read_table(table_path)
+    columns = [label for label in new.columns if 'status' not in label]
+    columns = columns[:8] + ['status'] + columns[8:]
+    old = new.reindex(columns=columns)
+    old = old.set_index('tracking_id')
+    old.to_csv("%s.old_columns.tsv" % (table_path),sep='\t')

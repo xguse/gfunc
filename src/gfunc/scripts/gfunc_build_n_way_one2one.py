@@ -366,19 +366,19 @@ def setup_parsers(yopts):
     
     parser_list.append(CDiffFpkmTrackerParser(cuffdiff_fpkm_path=y.species_info.Aedes_aegypti.expresion_data,
                                               species=y.species_info.Aedes_aegypti.name,
-                                              cuffdiff_exp_path=y.species_info.Aedes_aegypti.sig_data,
+                                              cuffdiff_exp_path=None,
                                               name_col='nearest_ref_id',
                                               combine_transcripts=True,tx_2_gene=None))
     
     parser_list.append(CDiffFpkmTrackerParser(cuffdiff_fpkm_path=y.species_info.Anopheles_gambiae.expresion_data,
                                               species=y.species_info.Anopheles_gambiae.name,
-                                              cuffdiff_exp_path=y.species_info.Anopheles_gambiae.sig_data,
+                                              cuffdiff_exp_path=None,
                                               name_col='nearest_ref_id',
                                               combine_transcripts=True,tx_2_gene=None))
     
     parser_list.append(CDiffFpkmTrackerParser(cuffdiff_fpkm_path=y.species_info.Culex_quinquefasciatus.expresion_data,
                                               species=y.species_info.Culex_quinquefasciatus.name,
-                                              cuffdiff_exp_path=y.species_info.Culex_quinquefasciatus.sig_data,
+                                              cuffdiff_exp_path=None,
                                               name_col='nearest_ref_id',
                                               combine_transcripts=True,tx_2_gene=None))
     
