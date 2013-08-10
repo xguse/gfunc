@@ -162,7 +162,7 @@ def calc_ptci_rprd(gFunc_edge,w_min=1.0,w_max=1.1):
         r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return (r_val_expn * (1-p_val_expn)) + r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return (r_val_expn * (1-p_val_expn)) * r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
     
     except (TypeError,AttributeError):
         return None
@@ -181,7 +181,7 @@ def calc_ptci_rprpd(gFunc_edge,w_min=1.0,w_max=1.1):
         p_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.p_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return (r_val_expn * (1-p_val_expn)) + (r_val_tfbs * (p_val_tfbs)) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return (r_val_expn * (1-p_val_expn)) * (r_val_tfbs * (p_val_tfbs)) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
     
     except (TypeError,AttributeError):
         return None
@@ -200,7 +200,7 @@ def calc_ptci_rrd(gFunc_edge,w_min=1.0,w_max=1.1):
         r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return r_val_expn + r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return r_val_expn * r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
     
     except (TypeError,AttributeError):
         return None

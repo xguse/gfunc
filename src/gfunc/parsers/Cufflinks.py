@@ -7,6 +7,7 @@ Code supporting parsing of Cufflinks type raw data files.
 from collections import defaultdict
 
 import numpy as np
+import pandas as pd
 
 #from bulbs.model import Node as bNode
 #from bulbs.model import Relationship as bRelationship
