@@ -200,14 +200,54 @@ def calc_ptci_rrd(gFunc_edge,w_min=1.0,w_max=1.1):
         r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
         d_val,d_min,d_max = gFunc_edge.data.divergence
         
-        return r_val_expn * r_val_tfbs * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+        return (r_val_expn + r_val_tfbs) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
     
     except (TypeError,AttributeError):
         return None
 
+def calc_ptci_rsrd(gFunc_edge,w_min=1.0,w_max=1.1):
+    """
+    calculate the PTCI
+    edge_correlation() should already have been run
+    
+    NOTE: this adds tfbs similarity to the equation
+    """
+    try:
+        r_val_expn = gFunc_edge.data.r_val
+        p_val_expn = gFunc_edge.data.p_val
+        r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
+        d_val,d_min,d_max = gFunc_edge.data.divergence
+        
+        return (r_val_expn + scale_r_val(r_val_tfbs)) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+    
+    except (TypeError,AttributeError):
+        return None
+    
+def calc_ptci_srsrd(gFunc_edge,w_min=1.0,w_max=1.1):
+    """
+    calculate the PTCI
+    edge_correlation() should already have been run
+    
+    NOTE: this adds tfbs similarity to the equation
+    """
+    try:
+        r_val_expn = gFunc_edge.data.r_val
+        p_val_expn = gFunc_edge.data.p_val
+        r_val_tfbs = gFunc_edge.data.tfbs_vector_similarity.r_val
+        d_val,d_min,d_max = gFunc_edge.data.divergence
+        
+        return (scale_r_val(r_val_expn) + scale_r_val(r_val_tfbs)) * scale_the_d(d_val,d_min,d_max,w_min,w_max) 
+    
+    except (TypeError,AttributeError):
+        return None
 
 ######################## END CALC PTCI LAND ######################################
 
+def scale_r_val(r_val):
+    """
+    returns r_val scaled to between 0 and 1
+    """
+    return (r_val + 1.0)/3.0
 
 
 def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
@@ -219,6 +259,8 @@ def get_ptci(gFunc_edge,kind='rpd',w_min=1.0,w_max=1.1):
                         'rpd' : calc_ptci_rpd,
                         'zpd' : calc_ptci_zpd,
                         'rd'  : calc_ptci_rd,
+                        'rsrd'  : calc_ptci_rsrd,
+                        'srsrd'  : calc_ptci_srsrd,
                         'rrd'  : calc_ptci_rrd,
                         'zd'  : calc_ptci_zd,
                         'r'   : calc_ptci_r,
